@@ -9,13 +9,17 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Main extends JFrame {
+public class Main extends JFrame
+{
 
     private static final long serialVersionUID = -3268699488432330183L;
     // Placeholder lists
-    private static String[] ingredients = { "Apple", "Bread", "Spinach", "Egg", "Potato", "Celery", "Beef",
-            "Jalapeno", "Pineapple", "Tomato", "Pork", "Bacon", "Chicken",
-            "Crackers"};
+    private static String[] ingredients = { "Apple", "Bread", "Spinach", "Egg", "Potato", "Celery", "Beef", "Jalapeno",
+            "Pineapple", "Tomato", "Pork", "Bacon", "Chicken", "Crackers", "Quail eggs", "Biscuits", "Caviar",
+            "Duck eggs", "Whole raw chicken", "Waffles", "Bleu cheese", "Siracha", "Enoki mushrooms", "Pear", "Kiwi",
+            "Blueberry", "Poblano pepper", "Cauliflower", "Smoked salmon", "Squid", "Fried rice", "Marshmallows",
+            "Corn flakes", "Banana pudding", "Chocolate chips", "Rack of lamb", "Maple syrup", "Sea urchin",
+            "Popcorn" };
     private static String[] themes = { "Breakfast", "Lunch", "Dinner", "Brunch", "Dessert", "Asian", "Italian",
             "Mexican", "Healthy", "Vegetarian", "Sandwiches", "Pastas", "Appetizer", "Tacos" };
 
@@ -75,7 +79,7 @@ public class Main extends JFrame {
         super("AI Chopped");
         setLayout(new GridBagLayout());
 
-        round = 1;
+        round = 0;
 
         pnlLeft = new JPanel(new GridBagLayout());
 
@@ -181,8 +185,9 @@ public class Main extends JFrame {
 
         return retStr;
     }
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args)
+    {
         // TODO Auto-generated method stub
         new Main();
     }
