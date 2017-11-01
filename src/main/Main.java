@@ -3,6 +3,14 @@
 
 //Main class to run the application and set up the user interface
 
+/*
+	Main Class should:
+		Set up the user interface
+		Set basket ingredients
+		Set round themes
+		Initialize everything
+ */
+
 package main;
 
 import java.awt.*;
