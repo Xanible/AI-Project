@@ -42,6 +42,7 @@ public class Main extends JFrame
     private JButton btnBegin;
     private JPanel pnlLeft, pnlBasket, pnlRight, pnlTheme;
     private int currBasket;
+    private Competition comp;
     private ActionListener cbBasketListener = new ActionListener()
     {
         public void actionPerformed(ActionEvent ae)
@@ -51,6 +52,10 @@ public class Main extends JFrame
             if(!(eventSrc.isSelected()))
             {
                 currBasket = currBasket - 1;
+                if(currBasket == 3)
+                {
+                    btnBegin.setEnabled(false);
+                }
             }
             else if(currBasket == 4)
             {
@@ -61,6 +66,10 @@ public class Main extends JFrame
             {
                 eventSrc.setSelected(true);
                 currBasket = currBasket + 1;
+                if(currBasket == 4)
+                {
+                    btnBegin.setEnabled(true);
+                }
             }
         }
     };
@@ -74,6 +83,8 @@ public class Main extends JFrame
                 txaOutput.append(padString(txaOutput.getRows() / 2 - 3) + "Round " + rounds[round] + "\n");
                 round = round + 1;
 
+                txaOutput.append(comp.beginRound(getCurrentBasket(),(String)(ddTheme.getSelectedItem())));
+                
                 if(round == 3)
                 {
                     btnBegin.setEnabled(false);
@@ -88,6 +99,7 @@ public class Main extends JFrame
         setLayout(new GridBagLayout());
 
         round = 0;
+        comp = new Competition();
 
         pnlLeft = new JPanel(new GridBagLayout());
 
@@ -141,6 +153,7 @@ public class Main extends JFrame
 
         btnBegin = new JButton("Begin");
         btnBegin.addActionListener(btnBeginListener);
+        btnBegin.setEnabled(false);
         c = new GridBagConstraints();
         c.weightx = 1;
         c.weighty = 0.2;
@@ -192,6 +205,23 @@ public class Main extends JFrame
         }
 
         return retStr;
+    }
+    
+    private String[] getCurrentBasket()
+    {
+        String[] basket = new String[4];
+        int inBasket = 0;
+        
+        for(int i = 0; i < cbBasket.length; i++)
+        {
+            if(cbBasket[i].isSelected())
+            {
+                basket[inBasket] = cbBasket[i].getText();
+                inBasket = inBasket + 1;
+            }
+        }
+        
+        return basket;
     }
 
     public static void main(String[] args)

@@ -12,5 +12,22 @@ public class Ingredient {
 		Name as string
 		Category as string
 */
+	private String name;
+	private String category;
 	
+	public Ingredient(String name, String category)
+	{
+	    this.name = name;
+	    this.category = category;
+	}
+	
+	public String getName()
+	{
+	    return name;
+	}
+	
+	public String getCategory()
+	{
+	    return category;
+	}
 }
