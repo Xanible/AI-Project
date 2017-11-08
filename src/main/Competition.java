@@ -33,7 +33,11 @@ public class Competition
             new Ingredient("Spinach", "Vegetable"), new Ingredient("Egg", "Meat"),
             new Ingredient("Potato", "Vegetable"), new Ingredient("Celery", "Vegetable"),
             new Ingredient("Beef", "Meat"), new Ingredient("Jalapeno", "Pepper"), new Ingredient("Pineapple", "Fruit"),
-            new Ingredient("Tomato", "Fruit"), new Ingredient("Pork", "Meat") };
+            new Ingredient("Tomato", "Fruit"), new Ingredient("Pork", "Meat"), new Ingredient("Bacon", "Meat"),
+            new Ingredient("Chicken", "Meat"), new Ingredient("Crackers", "Grain"),
+            new Ingredient("Quail eggs", "Meat"), new Ingredient("Biscuits", "Grain"), new Ingredient("Caviar", "Meat"),
+            new Ingredient("Duck egss", "Meat"), new Ingredient("Whole raw chicken", "Meat"),
+            new Ingredient("Waffles", "Grain"), new Ingredient("Bleu cheese", "Dairy") };
     /*
      * "Apple", "Bread", "Spinach", "Egg", "Potato", "Celery", "Beef", "Jalapeno",
      * "Pineapple", "Tomato", "Pork", "Bacon", "Chicken", "Crackers", "Quail eggs",
@@ -65,34 +69,34 @@ public class Competition
     {
         String output = "";
         this.theme = theme;
-        
+
         // Initialize pantry
         for(int i = 0; i < pantry.length; i++)
         {
             this.pantry[i] = getIngredientByName(pantry[i]);
-            pantryQuantities[i] = (int)(Math.random() * 400 + 1);
+            pantryQuantities[i] = (int) (Math.random() * 400 + 1);
         }
-        
+
         // Allow chefs to access pantry
         shuffleCooks();
         for(int i = 0; i < cooks.size(); i++)
         {
-            //cooks.get(i).accessPantry(pantry, pantryQuantities);
+            // cooks.get(i).accessPantry(pantry, pantryQuantities);
         }
-        
+
         // Judge the dishes
         for(int i = 0; i < cooks.size(); i++)
         {
             // Recipe dish = cooks.get(i).getDish();
-            //cooks.get(i).setScore(evaluateDish(dish));
+            // cooks.get(i).setScore(evaluateDish(dish));
         }
-        
+
         // Eliminate the losing chef
         cooks.remove(cooks.size() - 1);
-        
+
         return output;
     }
-    
+
     public Ingredient getIngredientByName(String name)
     {
         for(int i = 0; i < ingredients.length; i++)
@@ -102,14 +106,14 @@ public class Competition
                 return ingredients[i];
             }
         }
-        
+
         return null;
     }
-    
+
     public ArrayList<Ingredient> getIngredientsByCategory(String category)
     {
         ArrayList<Ingredient> inCategory = new ArrayList<Ingredient>();
-        
+
         for(int i = 0; i < ingredients.length; i++)
         {
             if(ingredients[i].getName().equals(category))
@@ -117,43 +121,31 @@ public class Competition
                 inCategory.add(ingredients[i]);
             }
         }
-        
+
         return inCategory;
     }
-    
+
     public Recipe[] getRecipes()
     {
         return recipes;
     }
-    
+
     public String getTheme()
     {
         return theme;
     }
-    
-    /*private void sortCooks()
-    {
-        for(int i = 0; i < cooks.size(); i++)
-        {
-            int max = i;
-            
-            for(int j = i + 1; j < cooks.size(); j++)
-            {
-                if(cooks.get(j).getScore() > cooks.get(max).getScore())
-                {
-                    max = j;
-                }
-            }
-            
-            if(max != i)
-            {
-                Cook temp = cooks.get(i);
-                cooks.set(i, cooks.get(max));
-                cooks.set(max, temp);
-            }
-        }
-    }*/
-    
+
+    /*
+     * private void sortCooks() { for(int i = 0; i < cooks.size(); i++) { int max =
+     * i;
+     * 
+     * for(int j = i + 1; j < cooks.size(); j++) { if(cooks.get(j).getScore() >
+     * cooks.get(max).getScore()) { max = j; } }
+     * 
+     * if(max != i) { Cook temp = cooks.get(i); cooks.set(i, cooks.get(max));
+     * cooks.set(max, temp); } } }
+     */
+
     private void shuffleCooks()
     {
         for(int i = 0; i < cooks.size(); i++)
@@ -161,16 +153,16 @@ public class Competition
             int ind;
             do
             {
-                ind = (int)(Math.random() * cooks.size());
+                ind = (int) (Math.random() * cooks.size());
             }
             while(ind == i);
-            
+
             Cook temp = cooks.get(ind);
             cooks.set(ind, cooks.get(i));
             cooks.set(i, temp);
         }
     }
-    
+
     private int evaluateDish()
     {
         return -1;
