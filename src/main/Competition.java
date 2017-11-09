@@ -29,7 +29,7 @@ public class Competition
      * eliminated
      */
     private ArrayList<Cook> cooks;
-    private Ingredient[] ingredients = { new Ingredient("Apple", "Fruit"), new Ingredient("Bread", "Grain"),
+    /*private Ingredient[] ingredients = { new Ingredient("Apple", "Fruit"), new Ingredient("Bread", "Grain"),
             new Ingredient("Spinach", "Vegetable"), new Ingredient("Egg", "Meat"),
             new Ingredient("Potato", "Vegetable"), new Ingredient("Celery", "Vegetable"),
             new Ingredient("Beef", "Meat"), new Ingredient("Jalapeno", "Pepper"), new Ingredient("Pineapple", "Fruit"),
@@ -37,7 +37,7 @@ public class Competition
             new Ingredient("Chicken", "Meat"), new Ingredient("Crackers", "Grain"),
             new Ingredient("Quail eggs", "Meat"), new Ingredient("Biscuits", "Grain"), new Ingredient("Caviar", "Meat"),
             new Ingredient("Duck egss", "Meat"), new Ingredient("Whole raw chicken", "Meat"),
-            new Ingredient("Waffles", "Grain"), new Ingredient("Bleu cheese", "Dairy") };
+            new Ingredient("Waffles", "Grain"), new Ingredient("Bleu cheese", "Dairy") };*/
     /*
      * "Apple", "Bread", "Spinach", "Egg", "Potato", "Celery", "Beef", "Jalapeno",
      * "Pineapple", "Tomato", "Pork", "Bacon", "Chicken", "Crackers", "Quail eggs",
@@ -49,7 +49,6 @@ public class Competition
      */
     private Ingredient[] pantry;
     private int[] pantryQuantities;
-    private Recipe[] recipes = {};
     private String theme;
 
     public Competition()
@@ -73,7 +72,7 @@ public class Competition
         // Initialize pantry
         for(int i = 0; i < pantry.length; i++)
         {
-            this.pantry[i] = getIngredientByName(pantry[i]);
+            this.pantry[i] = Ingredient.getIngredientByName(pantry[i]);
             pantryQuantities[i] = (int) (Math.random() * 400 + 1);
         }
 
@@ -90,44 +89,12 @@ public class Competition
             // Recipe dish = cooks.get(i).getDish();
             // cooks.get(i).setScore(evaluateDish(dish));
         }
+        //sortCooks();
 
         // Eliminate the losing chef
         cooks.remove(cooks.size() - 1);
 
         return output;
-    }
-
-    public Ingredient getIngredientByName(String name)
-    {
-        for(int i = 0; i < ingredients.length; i++)
-        {
-            if(ingredients[i].getName().equals(name))
-            {
-                return ingredients[i];
-            }
-        }
-
-        return null;
-    }
-
-    public ArrayList<Ingredient> getIngredientsByCategory(String category)
-    {
-        ArrayList<Ingredient> inCategory = new ArrayList<Ingredient>();
-
-        for(int i = 0; i < ingredients.length; i++)
-        {
-            if(ingredients[i].getName().equals(category))
-            {
-                inCategory.add(ingredients[i]);
-            }
-        }
-
-        return inCategory;
-    }
-
-    public Recipe[] getRecipes()
-    {
-        return recipes;
     }
 
     public String getTheme()

@@ -16,6 +16,8 @@ package main;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.*;
+import java.util.*;
 
 public class Main extends JFrame
 {
@@ -226,8 +228,42 @@ public class Main extends JFrame
 
     public static void main(String[] args)
     {
-        // TODO Auto-generated method stub
         new Main();
     }
 
+    public static void readIngredientsFile() throws Exception
+    {
+        BufferedReader in = new BufferedReader(new FileReader(new File("ingredients.txt")));
+        ArrayList<Ingredient> ings = new ArrayList<Ingredient>();
+        Ingredient[] ingredients = null;
+        
+        while(in.ready())
+        {
+            String input = in.readLine();
+            String[] parts = input.split(" ");
+            
+            parts[0] = parts[0].replaceAll("_", " ");
+            parts[1] = parts[1].replaceAll("_", " ");
+            
+            ings.add(new Ingredient(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4])));
+        }
+        
+        Ingredient.ingredients = ings.toArray(ingredients);
+        in.close();
+    }
+    
+    // ToDo
+    public static void readRecipesFile() throws Exception
+    {
+        BufferedReader in = new BufferedReader(new FileReader(new File("recipes.txt")));
+        ArrayList<Recipe> recs = new ArrayList<Recipe>();
+        Recipe[] recipes = null;
+        
+        while(in.ready())
+        {
+            String input = in.readLine();
+        }
+        
+        in.close();
+    }
 }
