@@ -25,10 +25,6 @@ public class Main extends JFrame
     private static final long serialVersionUID = -3268699488432330183L;
     private static final String delimiter = "   ";
 
-    // Placeholder lists
-    private static String[] themes = { "Breakfast", "Lunch", "Dinner", "Brunch", "Dessert", "Asian", "Italian",
-            "Mexican", "Healthy", "Vegetarian", "Sandwiches", "Pastas", "Appetizer", "Tacos" };
-
     private String[] rounds = { "One", "Two", "Three" };
     private int round;
     private JLabel lblBasket;
@@ -37,7 +33,7 @@ public class Main extends JFrame
     private JTextArea txaOutput;
     private JLabel lblTheme;
     private JComboBox<String> ddTheme;
-    private JButton btnBegin;
+    private JButton btnBegin, btnReset;
     private JPanel pnlLeft, pnlBasket, pnlRight, pnlTheme;
     private int currBasket;
     private Competition comp;
@@ -75,9 +71,12 @@ public class Main extends JFrame
     {
         public void actionPerformed(ActionEvent ae)
         {
+            if(round != 0)
+            {
+                txaOutput.append("\n\n");
+            }
             if(round < 3)
             {
-
                 txaOutput.append("\t\t    Round " + rounds[round] + "\n");
                 round = round + 1;
 
@@ -86,9 +85,29 @@ public class Main extends JFrame
                 if(round == 3)
                 {
                     btnBegin.setEnabled(false);
+                    btnReset.setEnabled(true);
                 }
             }
         }
+    };
+    private ActionListener btnResetListener = new ActionListener()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            btnReset.setEnabled(false);
+            round = 0;
+            currBasket = 0;
+            ddTheme.setSelectedIndex(0);
+            
+            for(int i = 0; i < cbBasket.length; i++)
+            {
+                cbBasket[i].setSelected(false);
+            }
+            
+            comp = new Competition();
+            txaOutput.setText("");
+        }
+
     };
 
     public Main()
@@ -158,6 +177,15 @@ public class Main extends JFrame
         c.gridy = 1;
         c.insets = new Insets(500, 0, 0, 0);
         pnlRight.add(btnBegin, c);
+        
+        btnReset = new JButton("Reset");
+        btnReset.addActionListener(btnResetListener);
+        btnReset.setEnabled(false);
+        c = new GridBagConstraints();
+        c.weightx = 1;
+        c.weighty = 0.2;
+        c.gridy = 2;
+        pnlRight.add(btnReset, c);
 
         c = new GridBagConstraints();
         c.weightx = .20;
@@ -204,6 +232,7 @@ public class Main extends JFrame
     {
         readIngredientsFile();
         readRecipesFile();
+        readCooksFile();
 
         new Main();
     }
@@ -309,5 +338,65 @@ public class Main extends JFrame
         Competition.themes = themes.toArray(new String[themes.size()]);
         Recipe.recipes = recs.toArray(new Recipe[recs.size()]);
         in.close();
+    }
+
+    public static void readCooksFile() throws Exception
+    {
+        BufferedReader in = new BufferedReader(new FileReader(new File("cooks.txt")));
+        ArrayList<Cook> cooks = new ArrayList<Cook>();
+
+        // Discard the first line
+        in.readLine();
+
+        while(in.ready())
+        {
+            // Read in the name, skill, and preferred complexity
+            String input = in.readLine();
+            String[] parts = input.split(delimiter);
+
+            String name = parts[0].replaceAll("_", " ");
+            int skill = Integer.parseInt(parts[1]);
+            int preferredComplexity = Integer.parseInt(parts[2]);
+
+            // Read in the cook's preferred ingredients
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            String[] pref = new String[parts.length - 1];
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                pref[i - 1] = parts[i];
+            }
+
+            // Read in the cook's avoided ingredients
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            String[] avoid = new String[parts.length - 1];
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                avoid[i - 1] = parts[i];
+            }
+
+            // Read in the cook's specialities
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            String[] excel = new String[parts.length - 1];
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                excel[i - 1] = parts[i];
+            }
+
+            cooks.add(new Cook(name, skill, preferredComplexity, pref, avoid, excel));
+
+            // Discard separator
+            in.readLine();
+        }
+
+        Competition.cookList = cooks.toArray(new Cook[cooks.size()]);
     }
 }

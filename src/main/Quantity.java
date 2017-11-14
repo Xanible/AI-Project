@@ -20,4 +20,9 @@ public class Quantity
     {
         return type;
     }
+    
+    public String toString()
+    {
+        return num + " " + type;
+    }
 }

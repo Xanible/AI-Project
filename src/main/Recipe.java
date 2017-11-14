@@ -79,4 +79,30 @@ public class Recipe {
     {
         return quantities;
     }
+    
+    public String toString()
+    {
+        String rec = (name.charAt(0) + "").toUpperCase() + name.substring(1) + "\nMade with: ";
+        
+        for(int i = 0; i < quantities.length; i++)
+        {
+            rec = rec + quantities[i] + " of ";
+            
+            if(i < ingredients.length)
+            {
+                rec = rec + ingredients[i];
+            }
+            else
+            {
+                rec = rec + optionalIngredients[i - ingredients.length];
+            }
+            
+            if(i < quantities.length - 1)
+            {
+                rec = rec + "\n";
+            }
+        }
+        
+        return rec;
+    }
 }

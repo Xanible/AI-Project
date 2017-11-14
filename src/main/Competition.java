@@ -29,7 +29,8 @@ public class Competition
      * eliminated
      */
     public static String[] themes;
-    
+    public static Cook[] cookList;
+
     private ArrayList<Cook> cooks;
     private Ingredient[] pantry;
     private int[] pantryQuantities;
@@ -38,11 +39,7 @@ public class Competition
     public Competition()
     {
         // Create list of chefs
-        cooks = new ArrayList<Cook>();
-        cooks.add(new Cook());
-        cooks.add(new Cook());
-        cooks.add(new Cook());
-        cooks.add(new Cook());
+        cooks = pickRandomCooks(4);
 
         pantry = new Ingredient[4];
         pantryQuantities = new int[4];
@@ -64,19 +61,35 @@ public class Competition
         shuffleCooks();
         for(int i = 0; i < cooks.size(); i++)
         {
-            // cooks.get(i).accessPantry(pantry, pantryQuantities);
+            pantryQuantities = cooks.get(i).accessPantry(this.pantry, pantryQuantities);
         }
 
         // Judge the dishes
         for(int i = 0; i < cooks.size(); i++)
         {
-            // Recipe dish = cooks.get(i).getDish();
-            // cooks.get(i).setScore(evaluateDish(dish));
+            Recipe dish = cooks.get(i).getDish();
+            cooks.get(i).setScore(evaluateDish(dish));
+            
+            output = output + cooks.get(i).getName() + ", scoring " + cooks.get(i).getScore() + " with:\n" + dish;
+            if(i < cooks.size() - 1)
+            {
+                output = output + "\n\n";
+            }
+            else
+            {
+                output = output + "\n";
+            }
         }
-        //sortCooks();
+        sortCooks();
 
         // Eliminate the losing chef
+        output = output + "\n" + cooks.get(cooks.size() - 1).getName() + " is eliminated!";
         cooks.remove(cooks.size() - 1);
+        
+        if(cooks.size() == 1)
+        {
+            output = output + "\n" + cooks.get(0).getName() + " wins!";
+        }
 
         return output;
     }
@@ -86,16 +99,48 @@ public class Competition
         return theme;
     }
 
-    /*
-     * private void sortCooks() { for(int i = 0; i < cooks.size(); i++) { int max =
-     * i;
-     * 
-     * for(int j = i + 1; j < cooks.size(); j++) { if(cooks.get(j).getScore() >
-     * cooks.get(max).getScore()) { max = j; } }
-     * 
-     * if(max != i) { Cook temp = cooks.get(i); cooks.set(i, cooks.get(max));
-     * cooks.set(max, temp); } } }
-     */
+    private ArrayList<Cook> pickRandomCooks(int count)
+    {
+        ArrayList<Cook> random = new ArrayList<Cook>();
+        ArrayList<Integer> inds = new ArrayList<Integer>();
+
+        for(int i = 0; i < count; i++)
+        {
+            int ind = (int) (Math.random() * cookList.length);
+            while(inds.contains(ind))
+            {
+                ind = (int) (Math.random() * cookList.length);
+            }
+
+            random.add(cookList[ind]);
+            inds.add(ind);
+        }
+
+        return random;
+    }
+
+    private void sortCooks()
+    {
+        for(int i = 0; i < cooks.size(); i++)
+        {
+            int max = i;
+
+            for(int j = i + 1; j < cooks.size(); j++)
+            {
+                if(cooks.get(j).getScore() > cooks.get(max).getScore())
+                {
+                    max = j;
+                }
+            }
+
+            if(max != i)
+            {
+                Cook temp = cooks.get(i);
+                cooks.set(i, cooks.get(max));
+                cooks.set(max, temp);
+            }
+        }
+    }
 
     private void shuffleCooks()
     {
@@ -114,7 +159,7 @@ public class Competition
         }
     }
 
-    private int evaluateDish()
+    private int evaluateDish(Recipe dish)
     {
         return -1;
     }
