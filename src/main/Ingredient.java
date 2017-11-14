@@ -18,17 +18,21 @@ public class Ingredient {
     
 	private String name;
 	private String category;
-	private int flavor;
-	private int spicyness;
-	private int sweetness;
+	private int spicy;
+	private int bitter;
+	private int pungent;
+	private int sweet;
+	private int umami;
 	
-	public Ingredient(String name, String category, int flavor, int spicy, int sweet)
+	public Ingredient(String name, String category, int spicy, int bitter, int pungent, int sweet, int umami)
 	{
 	    this.name = name;
 	    this.category = category;
-	    this.flavor = flavor;
-	    spicyness = spicy;
-	    sweetness = sweet;
+	    this.spicy = spicy;
+	    this.bitter = bitter;
+	    this.pungent = pungent;
+	    this.sweet = sweet;
+	    this.umami = umami;
 	}
 	
 	public String getName()
@@ -41,20 +45,30 @@ public class Ingredient {
 	    return category;
 	}
 	
-	public int getFlavor()
+	public int getSpicy()
 	{
-	    return flavor;
+	    return spicy;
 	}
 	
-	public int getSpicyness()
+	public int getBitter()
     {
-        return spicyness;
+        return bitter;
     }
 	
-	public int getSweetness()
+	public int getPungent()
     {
-        return sweetness;
+        return pungent;
     }
+	
+	public int getSweet()
+	{
+	    return sweet;
+	}
+	
+	public int getUmami()
+	{
+	    return umami;
+	}
 	
 	public static Ingredient getIngredientByName(String name)
     {

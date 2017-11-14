@@ -28,25 +28,9 @@ public class Competition
      * Eliminate a chef The chef with the lowest score each successive round is
      * eliminated
      */
+    public static String[] themes;
+    
     private ArrayList<Cook> cooks;
-    /*private Ingredient[] ingredients = { new Ingredient("Apple", "Fruit"), new Ingredient("Bread", "Grain"),
-            new Ingredient("Spinach", "Vegetable"), new Ingredient("Egg", "Meat"),
-            new Ingredient("Potato", "Vegetable"), new Ingredient("Celery", "Vegetable"),
-            new Ingredient("Beef", "Meat"), new Ingredient("Jalapeno", "Pepper"), new Ingredient("Pineapple", "Fruit"),
-            new Ingredient("Tomato", "Fruit"), new Ingredient("Pork", "Meat"), new Ingredient("Bacon", "Meat"),
-            new Ingredient("Chicken", "Meat"), new Ingredient("Crackers", "Grain"),
-            new Ingredient("Quail eggs", "Meat"), new Ingredient("Biscuits", "Grain"), new Ingredient("Caviar", "Meat"),
-            new Ingredient("Duck egss", "Meat"), new Ingredient("Whole raw chicken", "Meat"),
-            new Ingredient("Waffles", "Grain"), new Ingredient("Bleu cheese", "Dairy") };*/
-    /*
-     * "Apple", "Bread", "Spinach", "Egg", "Potato", "Celery", "Beef", "Jalapeno",
-     * "Pineapple", "Tomato", "Pork", "Bacon", "Chicken", "Crackers", "Quail eggs",
-     * "Biscuits", "Caviar", "Duck eggs", "Whole raw chicken", "Waffles",
-     * "Bleu cheese", "Siracha", "Enoki mushrooms", "Pear", "Kiwi", "Blueberry",
-     * "Poblano pepper", "Cauliflower", "Smoked salmon", "Squid", "Fried rice",
-     * "Marshmallows", "Corn flakes", "Banana pudding", "Chocolate chips",
-     * "Rack of lamb", "Maple syrup", "Sea urchin", "Popcorn"
-     */
     private Ingredient[] pantry;
     private int[] pantryQuantities;
     private String theme;

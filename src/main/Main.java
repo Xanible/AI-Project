@@ -23,13 +23,9 @@ public class Main extends JFrame
 {
 
     private static final long serialVersionUID = -3268699488432330183L;
+    private static final String delimiter = "   ";
+
     // Placeholder lists
-    private static String[] ingredients = { "Apple", "Bread", "Spinach", "Egg", "Potato", "Celery", "Beef", "Jalapeno",
-            "Pineapple", "Tomato", "Pork", "Bacon", "Chicken", "Crackers", "Quail eggs", "Biscuits", "Caviar",
-            "Duck eggs", "Whole raw chicken", "Waffles", "Bleu cheese", "Siracha", "Enoki mushrooms", "Pear", "Kiwi",
-            "Blueberry", "Poblano pepper", "Cauliflower", "Smoked salmon", "Squid", "Fried rice", "Marshmallows",
-            "Corn flakes", "Banana pudding", "Chocolate chips", "Rack of lamb", "Maple syrup", "Sea urchin",
-            "Popcorn" };
     private static String[] themes = { "Breakfast", "Lunch", "Dinner", "Brunch", "Dessert", "Asian", "Italian",
             "Mexican", "Healthy", "Vegetarian", "Sandwiches", "Pastas", "Appetizer", "Tacos" };
 
@@ -82,11 +78,11 @@ public class Main extends JFrame
             if(round < 3)
             {
 
-                txaOutput.append(padString(txaOutput.getRows() / 2 - 3) + "Round " + rounds[round] + "\n");
+                txaOutput.append("\t\t    Round " + rounds[round] + "\n");
                 round = round + 1;
 
-                txaOutput.append(comp.beginRound(getCurrentBasket(),(String)(ddTheme.getSelectedItem())));
-                
+                txaOutput.append(comp.beginRound(getCurrentBasket(), (String) (ddTheme.getSelectedItem())));
+
                 if(round == 3)
                 {
                     btnBegin.setEnabled(false);
@@ -111,12 +107,12 @@ public class Main extends JFrame
         lblBasket = new JLabel("Basket");
         pnlLeft.add(lblBasket, c);
 
-        pnlBasket = new JPanel(new GridLayout(ingredients.length, 1));
-        cbBasket = new JCheckBox[ingredients.length];
+        pnlBasket = new JPanel(new GridLayout(Ingredient.ingredients.length, 1));
+        cbBasket = new JCheckBox[Ingredient.ingredients.length];
 
-        for(int i = 0; i < ingredients.length; i++)
+        for(int i = 0; i < Ingredient.ingredients.length; i++)
         {
-            cbBasket[i] = new JCheckBox(ingredients[i]);
+            cbBasket[i] = new JCheckBox(Ingredient.ingredients[i].getName());
             cbBasket[i].addActionListener(cbBasketListener);
             cbBasket[i].setMinimumSize(new Dimension(200, 20));
             pnlBasket.add(cbBasket[i]);
@@ -146,7 +142,7 @@ public class Main extends JFrame
         pnlTheme = new JPanel(new GridLayout(1, 2));
         lblTheme = new JLabel("Theme:");
         pnlTheme.add(lblTheme);
-        ddTheme = new JComboBox<String>(themes);
+        ddTheme = new JComboBox<String>(Competition.themes);
         pnlTheme.add(ddTheme);
         c = new GridBagConstraints();
         c.weightx = 1;
@@ -187,33 +183,11 @@ public class Main extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    private String padString(int length)
-    {
-        String retStr = "";
-        int retLength = 0;
-
-        while(retLength < length)
-        {
-            if(length - retLength >= 8)
-            {
-                retStr = retStr + "\t";
-                retLength = retLength + 8;
-            }
-            else
-            {
-                retStr = retStr + " ";
-                retLength = retLength + 1;
-            }
-        }
-
-        return retStr;
-    }
-    
     private String[] getCurrentBasket()
     {
         String[] basket = new String[4];
         int inBasket = 0;
-        
+
         for(int i = 0; i < cbBasket.length; i++)
         {
             if(cbBasket[i].isSelected())
@@ -222,12 +196,15 @@ public class Main extends JFrame
                 inBasket = inBasket + 1;
             }
         }
-        
+
         return basket;
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
+        readIngredientsFile();
+        readRecipesFile();
+
         new Main();
     }
 
@@ -235,35 +212,102 @@ public class Main extends JFrame
     {
         BufferedReader in = new BufferedReader(new FileReader(new File("ingredients.txt")));
         ArrayList<Ingredient> ings = new ArrayList<Ingredient>();
-        Ingredient[] ingredients = null;
-        
+
+        // Discard the first line
+        in.readLine();
+
         while(in.ready())
         {
             String input = in.readLine();
-            String[] parts = input.split(" ");
-            
+            String[] parts = input.split(delimiter);
+
             parts[0] = parts[0].replaceAll("_", " ");
             parts[1] = parts[1].replaceAll("_", " ");
-            
-            ings.add(new Ingredient(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), Integer.parseInt(parts[4])));
+
+            ings.add(new Ingredient(parts[1], parts[0], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]),
+                    Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6])));
         }
-        
-        Ingredient.ingredients = ings.toArray(ingredients);
+
+        Ingredient.ingredients = ings.toArray(new Ingredient[ings.size()]);
         in.close();
     }
-    
-    // ToDo
+
     public static void readRecipesFile() throws Exception
     {
         BufferedReader in = new BufferedReader(new FileReader(new File("recipes.txt")));
         ArrayList<Recipe> recs = new ArrayList<Recipe>();
-        Recipe[] recipes = null;
-        
+        ArrayList<String> themes = new ArrayList<String>();
+
+        // Discard the first line
+        in.readLine();
+
         while(in.ready())
         {
+            // Read in the name, difficulty, time required, and complexity of the recipe
             String input = in.readLine();
+            String[] parts = input.split(delimiter);
+
+            String name = parts[0].replaceAll("_", " ");
+            int diff = Integer.parseInt(parts[1]);
+            int time = Integer.parseInt(parts[2]);
+            int complex = Integer.parseInt(parts[3]);
+
+            // Read in the categories of the recipe
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            String[] cats = new String[parts.length - 1];
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                if(!(themes.contains(parts[i])))
+                {
+                    themes.add(parts[i]);
+                }
+                cats[i - 1] = parts[i];
+            }
+
+            // Read in the ingredients (optional and required)
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            ArrayList<String> ings = new ArrayList<String>();
+            ArrayList<String> optIngs = new ArrayList<String>();
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                if(parts[i].charAt(0) == '-')
+                {
+                    optIngs.add(parts[i]);
+                }
+                else
+                {
+                    ings.add(parts[i]);
+                }
+            }
+
+            // Read in the quantities
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            Quantity[] quants = new Quantity[parts.length - 1];
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                String[] subparts = parts[i].split("_");
+
+                quants[i - 1] = new Quantity(Integer.parseInt(subparts[0]), subparts[1]);
+            }
+
+            recs.add(new Recipe(name, diff, time, complex, cats, ings.toArray(new String[ings.size()]),
+                    optIngs.toArray(new String[optIngs.size()]), quants));
+
+            // Discard separator
+            in.readLine();
         }
-        
+
+        Competition.themes = themes.toArray(new String[themes.size()]);
+        Recipe.recipes = recs.toArray(new Recipe[recs.size()]);
         in.close();
     }
 }
