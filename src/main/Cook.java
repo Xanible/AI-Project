@@ -24,7 +24,7 @@ public class Cook
     private String[] excelAt;
     private int score;
     private Recipe[] availableRecipes;
-    private Recipe[] dishes;
+    private Recipe[] dishes = new Recipe[0];
     //private Ingredient[] supplies;
     //private int[] quantities;
 
@@ -135,7 +135,17 @@ public class Cook
             }
             else
             {
-                // If c
+                // If category then pull the list of ingredients and evaluate each
+                ArrayList<Ingredient> cat = Ingredient.getIngredientsByCategory(ings[i]);
+                
+                for(int j = 0; j < cat.size(); j++)
+                {
+                    int ind = Ingredient.getIndexOfIngredient(ings[i].substring(1));
+                    if(quantities[ind] < qs[i].getNum())
+                    {
+                        return false;
+                    }
+                }
             }
         }
         

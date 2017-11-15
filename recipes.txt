@@ -1,0 +1,10 @@
+name   difficulty   time   complexity
+toast   1   5   1
+type(s):   breakfast
+Ingredients:   bread   butter   -jelly
+Quantities:   1_piece   1_tablespoon   1_tablespoon
+
+cereal   1   3   1
+type(s):   breakfast
+Ingredients:   cereal   milk   -fruit
+Quantities:   1_cup   2_cups   1_piece

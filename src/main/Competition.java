@@ -34,7 +34,7 @@ public class Competition
     private ArrayList<Cook> cooks;
     private Ingredient[] emphasizedIngredients;
     private int[] pantryQuantities;
-    private String theme;
+    private static String theme;
 
     public Competition()
     {
@@ -114,7 +114,7 @@ public class Competition
         return output;
     }
 
-    public String getTheme()
+    public static String getTheme()
     {
         return theme;
     }

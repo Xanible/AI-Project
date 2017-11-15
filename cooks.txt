@@ -1,0 +1,20 @@
+name   skill   preferredcomplexity
+Bob_Johnson   1   1
+preferredingredients:   bacon   ham   ground_pork   pork_roast   pork_chop
+avoidedingredients:   squid   mozzarella
+excelAt:   cereal
+
+Sam_Walters   5   2
+preferredingredients:   cereal   squid   chives   swiss
+avoidedingredients:   dill
+excelAt:   breakfast
+
+Hank_Roberts   1   5
+preferredingredients:   white_sugar   potato_roll   bagel
+avoidedingredients:   siracha
+excelAt:
+
+Dave_Oswald   5   5
+preferredingredients:
+avoidedingredients:
+excelAt:
