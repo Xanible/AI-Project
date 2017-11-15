@@ -97,4 +97,17 @@ public class Ingredient {
 
         return inCategory;
     }
+	
+	public static int getIndexOfIngredient(String ing)
+    {
+        for(int i = 0; i < Ingredient.ingredients.length; i++)
+        {
+            if(ing.equals(Ingredient.ingredients[i].getName()))
+            {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
 }

@@ -21,7 +21,6 @@ import java.util.*;
 
 public class Main extends JFrame
 {
-
     private static final long serialVersionUID = -3268699488432330183L;
     private static final String delimiter = "   ";
 
@@ -98,12 +97,12 @@ public class Main extends JFrame
             round = 0;
             currBasket = 0;
             ddTheme.setSelectedIndex(0);
-            
+
             for(int i = 0; i < cbBasket.length; i++)
             {
                 cbBasket[i].setSelected(false);
             }
-            
+
             comp = new Competition();
             txaOutput.setText("");
         }
@@ -177,7 +176,7 @@ public class Main extends JFrame
         c.gridy = 1;
         c.insets = new Insets(500, 0, 0, 0);
         pnlRight.add(btnBegin, c);
-        
+
         btnReset = new JButton("Reset");
         btnReset.addActionListener(btnResetListener);
         btnReset.setEnabled(false);
@@ -296,23 +295,15 @@ public class Main extends JFrame
                 cats[i - 1] = parts[i];
             }
 
-            // Read in the ingredients (optional and required)
+            // Read in the ingredients (optional, exact, and required)
             input = in.readLine();
             parts = input.split(delimiter);
 
-            ArrayList<String> ings = new ArrayList<String>();
-            ArrayList<String> optIngs = new ArrayList<String>();
+            String[] ings = new String[parts.length - 1];
 
             for(int i = 1; i < parts.length; i++)
             {
-                if(parts[i].charAt(0) == '-')
-                {
-                    optIngs.add(parts[i]);
-                }
-                else
-                {
-                    ings.add(parts[i]);
-                }
+                ings[i - 1] = parts[i];
             }
 
             // Read in the quantities
@@ -328,8 +319,7 @@ public class Main extends JFrame
                 quants[i - 1] = new Quantity(Integer.parseInt(subparts[0]), subparts[1]);
             }
 
-            recs.add(new Recipe(name, diff, time, complex, cats, ings.toArray(new String[ings.size()]),
-                    optIngs.toArray(new String[optIngs.size()]), quants));
+            recs.add(new Recipe(name, diff, time, complex, cats, ings, quants));
 
             // Discard separator
             in.readLine();
@@ -337,6 +327,12 @@ public class Main extends JFrame
 
         Competition.themes = themes.toArray(new String[themes.size()]);
         Recipe.recipes = recs.toArray(new Recipe[recs.size()]);
+
+        for(int i = 0; i < Recipe.recipes.length; i++)
+        {
+            System.out.println(Recipe.recipes[i]);
+        }
+
         in.close();
     }
 
@@ -398,5 +394,6 @@ public class Main extends JFrame
         }
 
         Competition.cookList = cooks.toArray(new Cook[cooks.size()]);
+        in.close();
     }
 }

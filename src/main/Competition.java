@@ -32,7 +32,7 @@ public class Competition
     public static Cook[] cookList;
 
     private ArrayList<Cook> cooks;
-    private Ingredient[] pantry;
+    private Ingredient[] emphasizedIngredients;
     private int[] pantryQuantities;
     private String theme;
 
@@ -41,8 +41,8 @@ public class Competition
         // Create list of chefs
         cooks = pickRandomCooks(4);
 
-        pantry = new Ingredient[4];
-        pantryQuantities = new int[4];
+        emphasizedIngredients = new Ingredient[4];
+        pantryQuantities = new int[Ingredient.ingredients.length];
     }
 
     public String beginRound(String[] pantry, String theme)
@@ -51,26 +51,46 @@ public class Competition
         this.theme = theme;
 
         // Initialize pantry
+        for(int i = 0; i < pantryQuantities.length; i++)
+        {
+            pantryQuantities[i] = (int) (Math.random() * 401);
+        }
+        
         for(int i = 0; i < pantry.length; i++)
         {
-            this.pantry[i] = Ingredient.getIngredientByName(pantry[i]);
-            pantryQuantities[i] = (int) (Math.random() * 400 + 1);
+            this.emphasizedIngredients[i] = Ingredient.getIngredientByName(pantry[i]);
+            int index = Ingredient.getIndexOfIngredient(pantry[i]);
+            pantryQuantities[index] = 100000000;
         }
 
         // Allow chefs to access pantry
         shuffleCooks();
         for(int i = 0; i < cooks.size(); i++)
         {
-            pantryQuantities = cooks.get(i).accessPantry(this.pantry, pantryQuantities);
+            pantryQuantities = cooks.get(i).accessPantry(this.emphasizedIngredients, pantryQuantities);
         }
 
         // Judge the dishes
         for(int i = 0; i < cooks.size(); i++)
         {
-            Recipe dish = cooks.get(i).getDish();
-            cooks.get(i).setScore(evaluateDish(dish));
+            Recipe[] dish = cooks.get(i).getDishes();
             
-            output = output + cooks.get(i).getName() + ", scoring " + cooks.get(i).getScore() + " with:\n" + dish;
+            for(int j = 0; j < dish.length; j++)
+            {
+                cooks.get(j).setScore(cooks.get(j).getScore() + evaluateDish(dish[j]));
+            }
+            
+            
+            output = output + cooks.get(i).getName() + ", scoring " + cooks.get(i).getScore() + " with:\n";
+            for(int j = 0; j < dish.length; j++)
+            {
+                output = output + dish[j];
+                
+                if(j < dish.length - 1)
+                {
+                    output = output + "\n";
+                }
+            }
             if(i < cooks.size() - 1)
             {
                 output = output + "\n\n";
