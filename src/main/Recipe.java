@@ -85,7 +85,7 @@ public class Recipe
     {
         String rec = (name.charAt(0) + "").toUpperCase() + name.substring(1) + "\nMade with:\n";
 
-        for(int i = 0; i < quantities.length; i++)
+        for(int i = 0; i < ingredients.length; i++)
         {
             rec = rec + quantities[i] + " of ";
 

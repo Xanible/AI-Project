@@ -230,6 +230,10 @@ flour   whole_grain_flour   0   0   0   0   0
 flour   corn_flour   0   0   0   0   0
 flour   white_flour   0   0   0   0   0
 flour   almond_flour   0   0   0   0   0
+milk   white_milk   0   0   0   0   0
+milk   coconut_milk   0   0   0   1   0
+milk   almond_milk   0   0   0   1   0
+other   cereal   0   0   0   1   0
 other   garlic   0   0   1   0   1
 other   milk_chocolate   0   0   0   1   0
 other   dark_chocolate   0   0   0   1   0
@@ -250,5 +254,3 @@ other   graham_cracker   0   0   0   1   0
 other   cracker   0   0   0   0   0
 other   coffee_bean   0   1   0   0   0
 other   nori   0   0   0   0   0
-other   coconut_milk   0   0   0   1   0
-other   almond_milk   0   0   0   1   0

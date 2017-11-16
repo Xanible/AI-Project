@@ -15,7 +15,7 @@ public class Ingredient {
 		Category as string
 */
     public static Ingredient[] ingredients;
-    
+    public static String[] meats = new String[] {"pork", "poultry", "beef", "meat_other", "seafood"};
 	private String name;
 	private String category;
 	private int spicy;
@@ -89,7 +89,7 @@ public class Ingredient {
 
         for(int i = 0; i < ingredients.length; i++)
         {
-            if(ingredients[i].getName().equals(category))
+            if(ingredients[i].getCategory().equals(category))
             {
                 inCategory.add(ingredients[i]);
             }

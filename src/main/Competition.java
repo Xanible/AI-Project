@@ -18,8 +18,6 @@ public class Competition
      * Start Each competition round Randomized priority access to the pantry for
      * each chef
      * 
-     * Array of Recipes stored here Public method to getRecipe
-     * 
      * Handle judging with a score based on: How many basket ingredients are used
      * How much of each ingredient is used? Does the dish fit the challenge theme?
      * How complex is the dish How difficult was the dish to make? Does the dish
@@ -32,23 +30,25 @@ public class Competition
     public static Cook[] cookList;
 
     private ArrayList<Cook> cooks;
-    private Ingredient[] emphasizedIngredients;
+    private static String[] emphasizedIngredients;
     private int[] pantryQuantities;
     private static String theme;
+    private static int timeLimit;
 
     public Competition()
     {
         // Create list of chefs
         cooks = pickRandomCooks(4);
 
-        emphasizedIngredients = new Ingredient[4];
+        timeLimit = 30;
+        emphasizedIngredients = new String[4];
         pantryQuantities = new int[Ingredient.ingredients.length];
     }
 
-    public String beginRound(String[] pantry, String theme)
+    public String beginRound(String[] pantry, String newTheme)
     {
         String output = "";
-        this.theme = theme;
+        theme = newTheme;
 
         // Initialize pantry
         for(int i = 0; i < pantryQuantities.length; i++)
@@ -58,7 +58,7 @@ public class Competition
         
         for(int i = 0; i < pantry.length; i++)
         {
-            this.emphasizedIngredients[i] = Ingredient.getIngredientByName(pantry[i]);
+            emphasizedIngredients[i] = pantry[i];
             int index = Ingredient.getIndexOfIngredient(pantry[i]);
             pantryQuantities[index] = 100000000;
         }
@@ -67,7 +67,7 @@ public class Competition
         shuffleCooks();
         for(int i = 0; i < cooks.size(); i++)
         {
-            pantryQuantities = cooks.get(i).accessPantry(this.emphasizedIngredients, pantryQuantities);
+            pantryQuantities = cooks.get(i).accessPantry(pantryQuantities);
         }
 
         // Judge the dishes
@@ -77,7 +77,7 @@ public class Competition
             
             for(int j = 0; j < dish.length; j++)
             {
-                cooks.get(j).setScore(cooks.get(j).getScore() + evaluateDish(dish[j]));
+                cooks.get(i).setScore(cooks.get(i).getScore() + evaluateDish(dish[j]));
             }
             
             
@@ -117,6 +117,16 @@ public class Competition
     public static String getTheme()
     {
         return theme;
+    }
+    
+    public static String[] getBasket()
+    {
+        return emphasizedIngredients;
+    }
+    
+    public static int getTimeLimit()
+    {
+        return timeLimit;
     }
 
     private ArrayList<Cook> pickRandomCooks(int count)
