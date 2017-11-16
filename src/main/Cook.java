@@ -105,12 +105,12 @@ public class Cook
                     cooked.add(ranked.get(i));
                     timeUsed = timeUsed + ranked.get(i).getTime();
 
-                    String[] ingredients = cooked.get(i).getIngredients();
+                    String[] ingredients = ranked.get(i).getIngredients();
                     for(int j = 0; j < ingredients.length; j++)
                     {
                         quantities[Ingredient.getIndexOfIngredient(
                                 ingredients[j])] = quantities[Ingredient.getIndexOfIngredient(ingredients[j])]
-                                        - cooked.get(i).getQuantities()[j].getNum();
+                                        - ranked.get(i).getQuantities()[j].getNum();
                     }
                     cookedDish = true;
                     break;
@@ -183,8 +183,8 @@ public class Cook
             Recipe m = matchIngredients(r, quantities);
             if(m != null)
             {
-                // Set the score
-                int score = 0;
+                // Set the score to the distance parameter (20 - 5 * dist)
+                int score = 20 - 5 * dist;
 
                 // Determine which of its categories the recipe matches
                 String[] matchedCategories = checkCategories(m);
@@ -393,6 +393,10 @@ public class Cook
                 {
                     categories.add(c);
                 }
+            }
+            else
+            {
+                categories.add(c);
             }
         }
 

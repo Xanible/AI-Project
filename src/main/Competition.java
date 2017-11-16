@@ -56,6 +56,14 @@ public class Competition
             pantryQuantities[i] = (int) (Math.random() * 401);
         }
         
+        // Testing, set all breads to 2
+        /*ArrayList<Ingredient> ings = Ingredient.getIngredientsByCategory("bread");
+        for(int i = 0; i < ings.size(); i++)
+        {
+            int ind = Ingredient.getIndexOfIngredient(ings.get(i).getName());
+            pantryQuantities[ind] = 2;
+        }*/
+        
         for(int i = 0; i < pantry.length; i++)
         {
             emphasizedIngredients[i] = pantry[i];
