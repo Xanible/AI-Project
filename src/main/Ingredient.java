@@ -16,6 +16,7 @@ public class Ingredient {
 */
     public static Ingredient[] ingredients;
     public static String[] meats = new String[] {"pork", "poultry", "beef", "meat_other", "seafood"};
+    
 	private String name;
 	private String category;
 	private int spicy;

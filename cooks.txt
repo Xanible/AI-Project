@@ -1,20 +1,25 @@
 name   skill   preferredcomplexity
-Bob_Johnson   1   1
+Dr_McDonald   4   2
 preferredingredients:   bacon   ham   ground_pork   pork_roast   pork_chop
 avoidedingredients:   squid   mozzarella
-excelAt:   cereal
+excelAt:   burger   cereal
 
-Sam_Walters   5   2
-preferredingredients:   cereal   squid   chives   swiss
-avoidedingredients:   dill
-excelAt:   breakfast
+Dr_Doran   5   4
+preferredingredients:   bacon   yellow_onion   shrimp   red_pepper_flakes   sharp_cheddar
+avoidedingredients:   ketchup   salmon
+excelAt:   gumbo   steak
 
-Hank_Roberts   1   5
-preferredingredients:   white_sugar   potato_roll   bagel
-avoidedingredients:   siracha
-excelAt:
+Mr_Whitston   3   5
+preferredingredients:   cereal   squid   chives   swiss   eel   cinnamon
+avoidedingredients:   dill   garlic   cottage
+excelAt:   breakfast   calamari
 
-Dave_Oswald   5   5
-preferredingredients:
-avoidedingredients:
+Mrs_McKinney   5   2
+preferredingredients:   white_sugar   potato_roll   bagel   siracha   peanut_butter
+avoidedingredients:   liver
+excelAt:   pie   scrambled_eggs
+
+Dr_Johnsten   4   1
+preferredingredients:   bleu_cheese   shrimp   avocado   whole_grain_flour
+avoidedingredients:   pistachio
 excelAt:

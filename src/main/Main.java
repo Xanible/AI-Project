@@ -288,9 +288,9 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                if(!(themes.contains(parts[i])))
+                if(!(themes.contains(parts[i].replaceAll("_", " "))))
                 {
-                    themes.add(parts[i]);
+                    themes.add(parts[i].replaceAll("_", " "));
                 }
                 cats[i - 1] = parts[i];
             }
@@ -303,7 +303,7 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                ings[i - 1] = parts[i];
+                ings[i - 1] = parts[i].replaceAll("_", " ");
             }
 
             // Read in the quantities
@@ -362,7 +362,7 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                pref[i - 1] = parts[i];
+                pref[i - 1] = parts[i].replaceAll("_", " ");
             }
 
             // Read in the cook's avoided ingredients
@@ -373,7 +373,7 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                avoid[i - 1] = parts[i];
+                avoid[i - 1] = parts[i].replaceAll("_", " ");
             }
 
             // Read in the cook's specialities
@@ -384,7 +384,7 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                excel[i - 1] = parts[i];
+                excel[i - 1] = parts[i].replaceAll("_", " ");
             }
 
             cooks.add(new Cook(name, skill, preferredComplexity, pref, avoid, excel));
@@ -393,7 +393,7 @@ public class Main extends JFrame
             in.readLine();
         }
 
-        Competition.cookList = cooks.toArray(new Cook[cooks.size()]);
+        Cook.cooks = cooks.toArray(new Cook[cooks.size()]);
         in.close();
     }
 }

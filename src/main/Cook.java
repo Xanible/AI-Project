@@ -16,6 +16,8 @@ public class Cook
      * Array of themes/recipes they’re phenomenal at Recipes being used as objects
      * 
      */
+    public static Cook[] cooks;
+    
     private String name;
     private int skill;
     private int preferredComplexity;
@@ -170,6 +172,7 @@ public class Cook
 
     // Scoring weights:
     // Theme matches = 100
+    // Distance from preferred complexity = 20 - 5 * dist
     // Basket ingredient = 25 per
     // Preferred ingredient = 10 per
     // Avoided ingredient = -200 per
@@ -223,7 +226,7 @@ public class Cook
             // If ingredient is option
             if(ings[i].charAt(0) == '-')
             {
-                String eing = evaluateByCategory(ings[i], i, quantities, qs);
+                String eing = evaluateByCategory(ings[i].substring(1), i, quantities, qs);
 
                 if(eing == null)
                 {

@@ -1,10 +1,198 @@
 name   difficulty   time   complexity
+spicy   bitter   pungent   sweet   umami
+
 toast   1   5   1
+Preferred_taste:   0   0   0   1   1
 type(s):   breakfast
 Ingredients:   bread   *butter   -jelly
 Quantities:   1_piece   1_tablespoon   1_tablespoon
+Subcomponents:
 
 cereal   1   3   1
+Preferred_taste:   0   0   0   1   0
 type(s):   breakfast
 Ingredients:   *cereal   milk   -fruit
 Quantities:   1_cup   2_cups   1_piece
+Subcomponents:
+
+sandwich   2   8   2
+Preferred_taste:   0   0   0   0   1
+type(s):   lunch   sandwich
+Ingredients:   bread   condiment   -condiment   -vegetable   -vegetable   -pork   -poultry   -beef   -meat_other   -seafood   -cheese
+Quantities:   2_pieces   1_tablespoon   1_tablespoon   1_piece   1_piece   1_piece   1_piece   1_piece   1_piece   1_piece   1_piece
+Subcomponents:   -sandwich_meat   -sandwich_sauce
+
+Burger   3   15   2
+Preferred_taste:   0   0   0   0   1
+type(s):   lunch   dinner
+Ingredients:   -cheese   condiment   -condiment   -condiment   -vegetable   -vegetable
+Quantities:   1_cup   2_cups   1_piece
+Subcomponents:   burger_patty
+
+burger_patty   2   10   2
+Preferred_taste:   0   0   0   0   1
+type(s):   burger_patty
+Ingredients:   *ground_beef   *garlic_powder   *onion_powder   *salt   *black_pepper
+Quantities:   0.5_pound   1_tablespoon   1_tablespoon   1_tablespoon   1_tablespoon   1_tablespoon
+Subcomponents:
+
+taco   3   15   2
+Preferred_taste:   1   0   0   0   1
+type(s):   lunch   dinner   mexican
+Ingredients:   *romaine_lettuce   -tomato   -cheese   *sour_cream   *taco_shell
+Quantities:   0.5_cups   0.5_cups   1_piece   1_tablespoon   1_piece
+Subcomponents:   taco_meat
+
+taco_meat   2   8   2
+Preferred_taste:   1   0   0   0   1
+type(s):   taco_meat
+Ingredients:   *ground_beef   *onion_powder   *salt   *black_pepper   *cumin   *cilantro
+Quantities:   0.25_pound   1_teaspoon   1_tablespoon   1_teaspoon   1_tablespoon   1_teaspoon
+Subcomponents:
+
+pasta   3   20   3
+Preferred_taste:   0   0   0   0   1
+type(s):   dinner   italian
+Ingredients:   noodle   -parmesan   *mozzarella
+Quantities:   2_cups   1_tablespoon   1_tablespoon
+Subcomponents:   pasta_sauce   pasta_topping
+
+red_sauce   1   5   1
+Preferred_taste:   0   0   0   0   0
+type(s):   pasta_sauce   pizza_sauce
+Ingredients:   *spaghetti_sauce
+Quantities:   1_jar
+Subcomponents:
+
+alfredo_sauce   1   5   1
+Preferred_taste:   0   0   0   0   0
+type(s):   pasta_sauce   pizza_sauce
+Ingredients:   *alfredo_sauce
+Quantities:   1_jar
+Subcomponents:
+
+meatballs   2   10   2
+Preferred_taste:   0   0   0   0   1
+type(s):   pasta_topping   sandwich_meat
+Ingredients:   *ground_beef   *garlic   *white_onion   oil
+Quantities:   1_pound   3_cloves   1_piece   2_teaspoons
+Subcomponents:
+
+sauteed_shrimp   3   8   2
+Preferred_taste:   0   0   0   0   1
+type(s):   pasta_topping   sandwich_meat   stir-fry_topping
+Ingredients:   *shrimp   *butter   *black_pepper   -garlic   -cayenne
+Quantities:   0.5_pound   2_tablespoons   1_teaspoon   2_cloves   1_teaspoon
+Subcomponents:
+
+blackened_shrimp   2   10   2
+Preferred_taste:   1   0   0   0   0
+type(s):   pasta_topping   sandwich_meat   dinner   lunch
+Ingredients:   *shrimp   *butter   *black_pepper   *garlic   *paprika   *thyme
+Quantities:   0.5_pound   2_tablespoons   1_teaspoon   2_cloves   0.5_teaspoon   0.5_teaspoon
+Subcomponents:
+
+stir-fry   3   30   3
+Preferred_taste:   0   0   0   0   1
+type(s):   lunch   dinner   asian
+Ingredients:   rice   -vegetable   -vegetable   *red_pepper_flakes   -peanuts
+Quantities:   0.5_cup   1_piece   1_piece   0.5_teaspoon   1_teaspoon
+Subcomponents:   stir-fry_sauce   stir-fry_topping
+
+teriyaki   1   3   1
+Preferred_taste:   0   0   0   1   0
+type(s):   stir-fry_sauce
+Ingredients:   *teriyaki
+Quantities:   0.25_cup
+Subcomponents:
+
+savory_beef_sauce   2   7   2
+Preferred_taste:   0   0   0   0   1
+type(s):   stir-fry_sauce
+Ingredients:   *oyster_sauce   *sesame_oil   *soy_sauce   *ginger   *sherry
+Quantities:   0.5_cup   1_tablespoon   2_tablespoons   1_teaspoon   2_teaspoon
+Subcomponents:
+
+sauteed_beef_strips   2   10   1
+Preferred_taste:   0   0   0   0   1
+type(s):   stir-fry_topping   sandwich_meat
+Ingredients:   *stir-fry_beef   *black_pepper   oil
+Quantities:   0.25_pound   1_teaspoon   2_tablespoons
+Subcomponents:
+
+sauteed_chicken   2   10   1
+Preferred_taste:   0   0   0   0   1
+type(s):   stir-fry_topping   pasta_topping   sandwich_meat
+Ingredients:   *chicken_breast   *black_pepper   oil
+Quantities:   0.25_pound   1_teaspoon   2_tablespoons
+Subcomponents:
+
+roasted_veggies   2   20   2
+Preferred_taste:   0   0   0   0   1
+type(s):   stir-fry_topping   lunch   dinner
+Ingredients:   vegetable   -vegetable   -vegetable   oil   black_pepper   -garlic
+Quantities:   1_cup   1_cup   1_cup   2_tablespoons   1_teaspoon   3_cloves
+Subcomponents:
+
+steamed_dumplings   4   25   3
+Preferred_taste:   0   0   0   0   1
+type(s):   dinner   asian
+Ingredients:   *wonton_wrappers   *ground_pork   *green_onion   *ginger   *seame_oil
+Quantities:   3_pieces   0.2_pound   1_piece   1_teaspoon   2_teaspoons
+Subcomponents:
+
+sushi   4   10   4
+Preferred_taste:   0   0   0   0   0
+type(s):   dinner   asian
+Ingredients:   *nori   seafood   -seafood   -avocado   *cream_cheese   -panko_bread_crumbs
+Quantities:   1_sheet   0.2_cups   0.2_cups   0.5_piece   0.5_tablespoon
+Subcomponents:   sushi_rice   spicy_mayo
+
+sushi_rice   3   30   3
+Preferred_taste:   0   0   0   1   0
+type(s):   sushi_rice
+Ingredients:   *sushi_rice   *sugar   *rice_wine_vinegar
+Quantities:   0.5_cup   0.15_cup   0.25_cup
+Subcomponents:
+
+spicy_mayo   1   3   1
+Preferred_taste:   1   0   0   0   0
+type(s):   spicy_mayo   sandwich_sauce
+Ingredients:   *siracha   *mayonnaise
+Quantities:   0.5_cup   0.5_cup
+Subcomponents:
+
+pizza   2   20   2
+Preferred_taste:   0   0   0   0   1
+type(s):   lunch   italian
+Ingredients:   flour   *olive_oil   cheese   -pepperoni   -vegetable   -pork   -seafood   -beef   -vegetable
+Quantities:   3.5_cups   2_tablespoons   1_cup   0.15_cup   1_piece   0.15_cup   0.15_cup   0.15_cup   1_piece
+Subcomponents:   pizza_sauce
+
+crunchy_chicken_wings   3   25   3
+Preferred_taste:   1   0   0   0   1
+type(s):   lunch
+Ingredients:   flour   *egg   *panko_bread_crumbs   *onion_powder   *black_pepper   *garlic_powder   *cayenne   *chicken_wings
+Quantities:   1_cup   2_pieces   1_cup   1_tablespoon   0.5_tablespoon   1_tablespoon   0.25_tablespoon   3_pieces
+Subcomponents:
+
+french_fries   3   20   2
+Preferred_taste:   0   0   0   0   1
+type(s):   lunch
+Ingredients:   potato   oil
+Quantities:   2_pieces   1_cup
+Subcomponents:
+
+mashed_potatoes   2   20   2
+Preferred_taste:   0   0   0   0   0
+type(s):   lunch
+Ingredients:   potato   butter   black_pepper
+Quantities:   2_pieces   0.5_cup   1_teaspoon
+Subcomponents:
+
+fried_pickles   3   15   2
+Preferred_taste:   0   0   0   0   1
+type(s):   lunch
+Ingredients:   *pickle   *panko_bread_crumbs   flour   *egg   -onion_powder   -garlic_powder
+Quantities:   2_pieces   1_cup   1_cup   2_pieces   1_tablespoon   1_tablespoon
+Subcomponents:

@@ -27,13 +27,12 @@ public class Competition
      * eliminated
      */
     public static String[] themes;
-    public static Cook[] cookList;
-
-    private ArrayList<Cook> cooks;
     private static String[] emphasizedIngredients;
-    private int[] pantryQuantities;
     private static String theme;
     private static int timeLimit;
+    
+    private ArrayList<Cook> cooks;
+    private int[] pantryQuantities;
 
     public Competition()
     {
@@ -53,16 +52,8 @@ public class Competition
         // Initialize pantry
         for(int i = 0; i < pantryQuantities.length; i++)
         {
-            pantryQuantities[i] = (int) (Math.random() * 401);
+            pantryQuantities[i] = (int) (Math.random() * 21);
         }
-        
-        // Testing, set all breads to 2
-        /*ArrayList<Ingredient> ings = Ingredient.getIngredientsByCategory("bread");
-        for(int i = 0; i < ings.size(); i++)
-        {
-            int ind = Ingredient.getIndexOfIngredient(ings.get(i).getName());
-            pantryQuantities[ind] = 2;
-        }*/
         
         for(int i = 0; i < pantry.length; i++)
         {
@@ -96,7 +87,7 @@ public class Competition
                 
                 if(j < dish.length - 1)
                 {
-                    output = output + "\n";
+                    output = output + "\n\n";
                 }
             }
             if(i < cooks.size() - 1)
@@ -144,13 +135,13 @@ public class Competition
 
         for(int i = 0; i < count; i++)
         {
-            int ind = (int) (Math.random() * cookList.length);
+            int ind = (int) (Math.random() * Cook.cooks.length);
             while(inds.contains(ind))
             {
-                ind = (int) (Math.random() * cookList.length);
+                ind = (int) (Math.random() * Cook.cooks.length);
             }
 
-            random.add(cookList[ind]);
+            random.add(Cook.cooks[ind]);
             inds.add(ind);
         }
 
