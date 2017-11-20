@@ -1,13 +1,14 @@
 name   skill   preferredcomplexity
-Dr_McDonald   4   2
-preferredingredients:   bacon   ham   ground_pork   pork_roast   pork_chop
-avoidedingredients:   squid   mozzarella
-excelAt:   burger   cereal
 
 Dr_Doran   5   4
 preferredingredients:   bacon   yellow_onion   shrimp   red_pepper_flakes   sharp_cheddar
 avoidedingredients:   ketchup   salmon
-excelAt:   gumbo   steak
+excelAt:   blackened_shrimp   steak
+
+Dr_McDonald   4   2
+preferredingredients:   bacon   ham   ground_pork   pork_roast   pork_chop
+avoidedingredients:   squid   mozzarella
+excelAt:   burger   cereal
 
 Mr_Whitston   3   5
 preferredingredients:   cereal   squid   chives   swiss   eel   cinnamon
