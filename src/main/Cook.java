@@ -17,7 +17,7 @@ public class Cook
      * 
      */
     public static Cook[] cooks;
-    
+
     private String name;
     private int skill;
     private int preferredComplexity;
@@ -204,13 +204,15 @@ public class Cook
                     score = score + Integer.parseInt(ings[i].substring(0, ings[i].indexOf('*')));
                     newIngs[i] = ings[i].substring(ings[i].indexOf('*') + 1);
                 }
-                
-                Recipe eRec = new Recipe(m.getName(), m.getDifficulty(), m.getTime(), m.getComplexity(), m.getCategories(), newIngs, m.getQuantities());
+
+                Recipe eRec = new Recipe(m.getName(), m.getDifficulty(), m.getTime(), m.getComplexity(),
+                        m.getCategories(), newIngs, m.getSubComponents(), m.getQuantities(), m.getSpicy(), m.getBitter(), m.getPungent(),
+                        m.getSweet(), m.getUmami());
                 eRec.setGoodness(score);
                 possible.add(eRec);
             }
         }
-        
+
         return possible;
     }
 
@@ -282,7 +284,8 @@ public class Cook
         }
 
         return new Recipe(r.getName(), r.getDifficulty(), r.getTime(), r.getComplexity(), r.getCategories(),
-                newIngs.toArray(new String[newIngs.size()]), newQuantities.toArray(new Quantity[newQuantities.size()]));
+                newIngs.toArray(new String[newIngs.size()]), r.getSubComponents(), newQuantities.toArray(new Quantity[newQuantities.size()]),
+                r.getSpicy(), r.getBitter(), r.getPungent(), r.getSweet(), r.getUmami());
     }
 
     private String evaluateByCategory(String ing, int i, int[] quantities, Quantity[] requiredQuantities)
@@ -355,7 +358,7 @@ public class Cook
                 recipes.set(i, temp);
             }
         }
-        
+
         return recipes;
     }
 

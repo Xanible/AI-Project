@@ -266,7 +266,9 @@ public class Main extends JFrame
         ArrayList<Recipe> recs = new ArrayList<Recipe>();
         ArrayList<String> themes = new ArrayList<String>();
 
-        // Discard the first line
+        // Discard the first three lines
+        in.readLine();
+        in.readLine();
         in.readLine();
 
         while(in.ready())
@@ -280,6 +282,16 @@ public class Main extends JFrame
             int time = Integer.parseInt(parts[2]);
             int complex = Integer.parseInt(parts[3]);
 
+            // Read in the taste stats of the recipe
+            input = in.readLine();
+            parts = input.split(delimiter);
+            
+            int spicy = Integer.parseInt(parts[1]);
+            int bitter = Integer.parseInt(parts[2]);
+            int pungent = Integer.parseInt(parts[3]);
+            int sweet = Integer.parseInt(parts[4]);
+            int umami = Integer.parseInt(parts[5]);
+            
             // Read in the categories of the recipe
             input = in.readLine();
             parts = input.split(delimiter);
@@ -316,10 +328,21 @@ public class Main extends JFrame
             {
                 String[] subparts = parts[i].split("_");
 
-                quants[i - 1] = new Quantity(Integer.parseInt(subparts[0]), subparts[1]);
+                quants[i - 1] = new Quantity((int)(100 * Double.parseDouble(subparts[0])), subparts[1]);
             }
 
-            recs.add(new Recipe(name, diff, time, complex, cats, ings, quants));
+            // Read in the subcomponents
+            input = in.readLine();
+            parts = input.split(delimiter);
+
+            String[] subComponents = new String[parts.length - 1];
+
+            for(int i = 1; i < parts.length; i++)
+            {
+                subComponents[i - 1] = parts[i];
+            }
+            
+            recs.add(new Recipe(name, diff, time, complex, cats, ings, subComponents, quants, spicy, bitter, pungent, sweet, umami));
 
             // Discard separator
             in.readLine();
@@ -327,11 +350,6 @@ public class Main extends JFrame
 
         Competition.themes = themes.toArray(new String[themes.size()]);
         Recipe.recipes = recs.toArray(new Recipe[recs.size()]);
-
-        for(int i = 0; i < Recipe.recipes.length; i++)
-        {
-            System.out.println(Recipe.recipes[i]);
-        }
 
         in.close();
     }
@@ -341,7 +359,8 @@ public class Main extends JFrame
         BufferedReader in = new BufferedReader(new FileReader(new File("cooks.txt")));
         ArrayList<Cook> cooks = new ArrayList<Cook>();
 
-        // Discard the first line
+        // Discard the first two lines
+        in.readLine();
         in.readLine();
 
         while(in.ready())

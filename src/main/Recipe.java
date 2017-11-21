@@ -20,12 +20,18 @@ public class Recipe
     private int complexity;
     private String[] categories;
     private String[] ingredients;
+    private String[] subComponents;
     private Quantity[] quantities;
+    private int spicy;
+    private int bitter;
+    private int pungent;
+    private int sweet;
+    private int umami;
     
     // Heuristic value used for selection
     private int goodness;
 
-    public Recipe(String name, int difficulty, int time, int complexity, String[] categories, String[] ingredients, Quantity[] quantities)
+    public Recipe(String name, int difficulty, int time, int complexity, String[] categories, String[] ingredients, String[] subComponents, Quantity[] quantities, int spicy, int bitter, int pungent, int sweet, int umami)
     {
         this.name = name;
         this.difficulty = difficulty;
@@ -33,7 +39,13 @@ public class Recipe
         this.complexity = complexity;
         this.categories = categories;
         this.ingredients = ingredients;
+        this.subComponents = subComponents;
         this.quantities = quantities;
+        this.spicy = spicy;
+        this.bitter = bitter;
+        this.pungent = pungent;
+        this.sweet = sweet;
+        this.umami = umami;
     }
 
     public String getName()
@@ -66,9 +78,38 @@ public class Recipe
         return ingredients;
     }
 
+    public String[] getSubComponents()
+    {
+        return subComponents;
+    }
     public Quantity[] getQuantities()
     {
         return quantities;
+    }
+    
+    public int getSpicy()
+    {
+        return spicy;
+    }
+    
+    public int getBitter()
+    {
+        return bitter;
+    }
+    
+    public int getPungent()
+    {
+        return pungent;
+    }
+    
+    public int getSweet()
+    {
+        return sweet;
+    }
+    
+    public int getUmami()
+    {
+        return umami;
     }
     
     public int getGoodness()
