@@ -221,7 +221,7 @@ Subcomponents:
 ravioli   3   10   2
 Preferred_taste:   0   0   0   0   0
 type(s):   italian   dinner   lunch
-Ingredients:   flour   *egg   -pork   -beef   -seafood   -*cheese   *ricotta
+Ingredients:   flour   *egg   -pork   -beef   -seafood   -cheese   *ricotta
 Quantities:   1_cup   1_piece   0.25_pound   0.25_pound   0.25_pound   0.25_cup   0.25_cup
 Subcomponents:   pasta_sauce
 
@@ -237,3 +237,4 @@ Preffered_taste:   0   0   0   0   0
 type(s):   italian   side_dish   lunch
 Ingredients:   *squid   *panko_bread_crumbs   *egg   flour   -spices   -spices
 Quantities:   0.5_pound   1_cup   1_piece   1_cup   1_tablespoon   1_tablespoon
+Subcomponents:
