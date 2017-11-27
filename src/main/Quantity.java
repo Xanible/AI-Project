@@ -23,6 +23,6 @@ public class Quantity
     
     public String toString()
     {
-        return num + " " + type;
+        return (double)(num/100.0) + " " + type;
     }
 }

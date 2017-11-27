@@ -30,7 +30,7 @@ public class Competition
     private static String[] emphasizedIngredients;
     private static String theme;
     private static int timeLimit;
-    
+
     private ArrayList<Cook> cooks;
     private int[] pantryQuantities;
 
@@ -52,9 +52,10 @@ public class Competition
         // Initialize pantry
         for(int i = 0; i < pantryQuantities.length; i++)
         {
-            pantryQuantities[i] = (int) (Math.random() * 21);
+            // Multiply by 100 to allow for fractional ingredient requirements
+            pantryQuantities[i] = (int) ((Math.random() * 21) * 100);
         }
-        
+
         for(int i = 0; i < pantry.length; i++)
         {
             emphasizedIngredients[i] = pantry[i];
@@ -73,18 +74,17 @@ public class Competition
         for(int i = 0; i < cooks.size(); i++)
         {
             Recipe[] dish = cooks.get(i).getDishes();
-            
+
             for(int j = 0; j < dish.length; j++)
             {
-                cooks.get(i).setScore(cooks.get(i).getScore() + evaluateDish(dish[j]));
+                cooks.get(i).setScore(cooks.get(i).getScore() + evaluateDish(cooks.get(i), dish[j]));
             }
-            
-            
+
             output = output + cooks.get(i).getName() + ", scoring " + cooks.get(i).getScore() + " with:\n";
             for(int j = 0; j < dish.length; j++)
             {
                 output = output + dish[j];
-                
+
                 if(j < dish.length - 1)
                 {
                     output = output + "\n\n";
@@ -104,7 +104,7 @@ public class Competition
         // Eliminate the losing chef
         output = output + "\n" + cooks.get(cooks.size() - 1).getName() + " is eliminated!";
         cooks.remove(cooks.size() - 1);
-        
+
         if(cooks.size() == 1)
         {
             output = output + "\n" + cooks.get(0).getName() + " wins!";
@@ -117,12 +117,12 @@ public class Competition
     {
         return theme;
     }
-    
+
     public static String[] getBasket()
     {
         return emphasizedIngredients;
     }
-    
+
     public static int getTimeLimit()
     {
         return timeLimit;
@@ -188,8 +188,34 @@ public class Competition
         }
     }
 
-    private int evaluateDish(Recipe dish)
+    private int evaluateDish(Cook cook, Recipe dish)
     {
-        return -1;
+        int score = 0;
+
+        // Check that dish matches the theme of the round
+        String[] categories = Cook.checkCategories(dish);
+        if(!(Cook.inList(theme, categories)))
+        {
+            score = score - 200;
+        }
+        // Check if the cook excels at this recipe
+        if(Cook.inList(dish.getName(), cook.getExeclAt()))
+        {
+            score = score + 45;
+        }
+        
+        // Ingredient level scoring
+        String[] ings = dish.getIngredients();
+        for(int i = 0; i < ings.length; i++)
+        {
+            if(Cook.inList(ings[i], emphasizedIngredients))
+            {
+                score = score + 30;
+            }
+            int dist = Cook.computeFlavorDistance(dish, Ingredient.getIngredientByName(ings[i]));
+            score = score - 20 * dist;
+        }
+
+        return score;
     }
 }

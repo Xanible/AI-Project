@@ -342,7 +342,7 @@ public class Main extends JFrame
                 subComponents[i - 1] = parts[i];
             }
             
-            recs.add(new Recipe(name, diff, time, complex, cats, ings, subComponents, quants, spicy, bitter, pungent, sweet, umami));
+            recs.add(new Recipe(name, diff, time, complex, cats, ings, subComponents, quants, spicy, bitter, pungent, sweet, umami, true));
 
             // Discard separator
             in.readLine();
@@ -350,7 +350,7 @@ public class Main extends JFrame
 
         Competition.themes = themes.toArray(new String[themes.size()]);
         Recipe.recipes = recs.toArray(new Recipe[recs.size()]);
-
+        
         in.close();
     }
 

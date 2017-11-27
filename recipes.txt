@@ -22,31 +22,31 @@ Ingredients:   bread   condiment   -condiment   -vegetable   -vegetable   -pork 
 Quantities:   2_pieces   1_tablespoon   1_tablespoon   1_piece   1_piece   1_piece   1_piece   1_piece   1_piece   1_piece   1_piece
 Subcomponents:   -sandwich_meat   -sandwich_sauce
 
-Burger   3   15   2
+burger   3   15   2
 Preferred_taste:   0   0   0   0   1
 type(s):   lunch   dinner
 Ingredients:   -cheese   condiment   -condiment   -condiment   -vegetable   -vegetable
-Quantities:   1_cup   2_cups   1_piece
+Quantities:   1_piece   1_cup   2_cups   2_cups   1_piece   1_piece
 Subcomponents:   burger_patty
 
 burger_patty   2   10   2
 Preferred_taste:   0   0   0   0   1
 type(s):   burger_patty
-Ingredients:   *ground_beef   *garlic_powder   *onion_powder   *salt   *black_pepper
+Ingredients:   *ground_beef   -*garlic_powder   -*onion_powder   -*salt   -*black_pepper
 Quantities:   0.5_pound   1_tablespoon   1_tablespoon   1_tablespoon   1_tablespoon   1_tablespoon
 Subcomponents:
 
 taco   3   15   2
 Preferred_taste:   1   0   0   0   1
 type(s):   lunch   dinner   mexican
-Ingredients:   *romaine_lettuce   -tomato   -cheese   *sour_cream   *taco_shell
+Ingredients:   *romaine_lettuce   -tomato   -cheese   -*sour_cream   *taco_shells
 Quantities:   0.5_cups   0.5_cups   1_piece   1_tablespoon   1_piece
 Subcomponents:   taco_meat
 
 taco_meat   2   8   2
 Preferred_taste:   1   0   0   0   1
 type(s):   taco_meat
-Ingredients:   *ground_beef   *onion_powder   *salt   *black_pepper   *cumin   *cilantro
+Ingredients:   *ground_beef   -*onion_powder   -*salt   -*black_pepper   -*cumin   -*cilantro
 Quantities:   0.25_pound   1_teaspoon   1_tablespoon   1_teaspoon   1_tablespoon   1_teaspoon
 Subcomponents:
 
@@ -137,21 +137,21 @@ Subcomponents:
 steamed_dumplings   4   25   3
 Preferred_taste:   0   0   0   0   1
 type(s):   dinner   asian
-Ingredients:   *wonton_wrappers   *ground_pork   *green_onion   *ginger   *seame_oil
+Ingredients:   *wonton_wrappers   *ground_pork   *green_onion   *ginger   *sesame_oil
 Quantities:   3_pieces   0.2_pound   1_piece   1_teaspoon   2_teaspoons
 Subcomponents:
 
 sushi   4   10   4
 Preferred_taste:   0   0   0   0   0
 type(s):   dinner   asian
-Ingredients:   *nori   seafood   -seafood   -avocado   *cream_cheese   -panko_bread_crumbs
-Quantities:   1_sheet   0.2_cups   0.2_cups   0.5_piece   0.5_tablespoon
+Ingredients:   *nori   seafood   -seafood   -avocado   *cream_cheese   -*panko_bread_crumbs
+Quantities:   1_sheet   0.2_cups   0.2_cups   0.5_piece   0.5_tablespoon   0.5_tablespoon
 Subcomponents:   sushi_rice   spicy_mayo
 
 sushi_rice   3   30   3
 Preferred_taste:   0   0   0   1   0
 type(s):   sushi_rice
-Ingredients:   *sushi_rice   *sugar   *rice_wine_vinegar
+Ingredients:   *sushi_rice   sugar   *vinegar
 Quantities:   0.5_cup   0.15_cup   0.25_cup
 Subcomponents:
 
@@ -172,7 +172,7 @@ Subcomponents:   pizza_sauce
 crunchy_chicken_wings   3   25   3
 Preferred_taste:   1   0   0   0   1
 type(s):   lunch
-Ingredients:   flour   *egg   *panko_bread_crumbs   *onion_powder   *black_pepper   *garlic_powder   *cayenne   *chicken_wings
+Ingredients:   flour   *egg   *panko_bread_crumbs   *onion_powder   *black_pepper   *garlic_powder   *cayenne   *chicken_wing
 Quantities:   1_cup   2_pieces   1_cup   1_tablespoon   0.5_tablespoon   1_tablespoon   0.25_tablespoon   3_pieces
 Subcomponents:
 

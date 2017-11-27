@@ -64,6 +64,7 @@ cheese   romano   0   0   0   0   0
 cheese   asiago   0   0   0   0   0
 cheese   bleu_cheese   0   1   1   0   0
 cheese   swiss   0   0   0   0   0
+cheese   cream_cheese   0   0   0   0   0
 cheese   sharp_cheddar   0   1   0   0   0
 cheese   mild_cheddar   0   0   0   0   0
 cheese   white_cheddar   0   0   0   0   0
@@ -84,9 +85,9 @@ spices   dill   0   1   0   0   0
 spices   chives   0   0   0   0   1
 spices   rosemary   0   0   0   0   0
 spices   mint   0   0   1   0   0
-spices   white_sugar   0   0   0   1   0
-spices   brown_sugar   0   0   0   1   0
-spices   powdered_sugar   0   0   0   1   0
+sugar   white_sugar   0   0   0   1   0
+sugar   brown_sugar   0   0   0   1   0
+sugar   powdered_sugar   0   0   0   1   0
 spices   salt   0   0   0   0   0
 spices   black_pepper   0   0   0   0   0
 bread   french_bread   0   0   0   0   0
@@ -246,6 +247,7 @@ nut   pistachio   0   0   0   0   0
 other   sherry   0   0   1   0   0
 other   wonton_wrappers   0   0   0   0   0
 other   couscous   0   0   0   0   0
+other   cereal   0   0   0   0   0
 sherbert   orange_sherbert   0   0   0   1   0
 sherbert   lime_sherbert   0   0   0   1   0
 sherbert   strawberry_sherbert   0   0   0   1   0
