@@ -96,7 +96,7 @@ stir-fry   3   15   3
 Preferred_taste:   0   0   0   0   1
 type(s):   lunch   dinner   asian
 Ingredients:   rice   -vegetable   -vegetable   *red_pepper_flakes   -peanuts   -green_onion
-Quantities:   0.5_cup   1_piece   1_piece   0.5_teaspoon   1_teaspoon
+Quantities:   0.5_cup   1_piece   1_piece   0.5_teaspoon   1_teaspoon   0.5_cup
 Subcomponents:   stir-fry_sauce   -stir-fry_topping
 
 teriyaki   1   3   1
@@ -215,7 +215,7 @@ fried_rice   3   6   2
 Preferred_taste:   0   0   0   0   1
 type(s):   asian   side_dish
 Ingredients:   rice   *soy_sauce   *egg   -vegetable   -vegetable   *green_onion
-Quantities:   1_cup   0.5_cups   1_piece   1_piece   1_piece
+Quantities:   1_cup   0.5_cups   1_piece   1_piece   1_piece   0.5_cup
 Subcomponents:
 
 ravioli   3   10   2
@@ -228,12 +228,13 @@ Subcomponents:   pasta_sauce
 lasagna   2   26   2
 Preferred_taste:   0   0   0   0   0
 type(s):   italian   dinner   lunch
-Ingredients:   *lasagna_noodle   -pork   -beef   *mozzarella   *ricotta
+Ingredients:   *lasagna   -pork   -beef   *mozzarella   *ricotta
 Quantities:   5_pieces   0.25_pound   0.25_pound   1.5_cup   0.5_cup
 Subcomponents:   pasta_sauce
 
-Calamari   3   15   2
+calamari   3   15   2
 Preffered_taste:   0   0   0   0   0
 type(s):   italian   side_dish   lunch
 Ingredients:   *squid   *panko_bread_crumbs   *egg   flour   -spices   -spices
 Quantities:   0.5_pound   1_cup   1_piece   1_cup   1_tablespoon   1_tablespoon
+Subcomponents:
