@@ -27,8 +27,6 @@ public class Cook
     private int score;
     private Recipe[] availableRecipes;
     private Recipe[] dishes = new Recipe[0];
-    // private Ingredient[] supplies;
-    // private int[] quantities;
 
     public Cook(String name, int skill, int preferredComplexity, String[] preferred, String[] avoided, String[] excelAt)
     {
@@ -88,7 +86,6 @@ public class Cook
 
     public int[] accessPantry(int[] quantities)
     {
-        System.out.println(this.getName());
         ArrayList<Recipe> ranked = rankPossibleRecipes(quantities);
         ArrayList<Recipe> cooked = new ArrayList<Recipe>();
         int timeUsed = 0;
@@ -110,7 +107,6 @@ public class Cook
                     {
                         cooked.add(ranked.get(i));
                         timeUsed = timeUsed + ranked.get(i).getTime();
-                        System.out.println("Selected " + ranked.get(i).getName());
 
                         String[] ingredients = ranked.get(i).getIngredients();
                         for(int j = 0; j < ingredients.length; j++)

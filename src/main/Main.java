@@ -257,6 +257,7 @@ public class Main extends JFrame
         }
 
         Ingredient.ingredients = ings.toArray(new Ingredient[ings.size()]);
+        
         in.close();
     }
 
@@ -285,13 +286,13 @@ public class Main extends JFrame
             // Read in the taste stats of the recipe
             input = in.readLine();
             parts = input.split(delimiter);
-            
+
             int spicy = Integer.parseInt(parts[1]);
             int bitter = Integer.parseInt(parts[2]);
             int pungent = Integer.parseInt(parts[3]);
             int sweet = Integer.parseInt(parts[4]);
             int umami = Integer.parseInt(parts[5]);
-            
+
             // Read in the categories of the recipe
             input = in.readLine();
             parts = input.split(delimiter);
@@ -300,11 +301,7 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                if(!(themes.contains(parts[i].replaceAll("_", " "))))
-                {
-                    themes.add(parts[i].replaceAll("_", " "));
-                }
-                cats[i - 1] = parts[i];
+                cats[i - 1] = parts[i].replaceAll("_", " ");
             }
 
             // Read in the ingredients (optional, exact, and required)
@@ -328,7 +325,7 @@ public class Main extends JFrame
             {
                 String[] subparts = parts[i].split("_");
 
-                quants[i - 1] = new Quantity((int)(100 * Double.parseDouble(subparts[0])), subparts[1]);
+                quants[i - 1] = new Quantity((int) (100 * Double.parseDouble(subparts[0])), subparts[1]);
             }
 
             // Read in the subcomponents
@@ -339,18 +336,81 @@ public class Main extends JFrame
 
             for(int i = 1; i < parts.length; i++)
             {
-                subComponents[i - 1] = parts[i];
+                subComponents[i - 1] = parts[i].replaceAll("_", " ");
             }
-            
-            recs.add(new Recipe(name, diff, time, complex, cats, ings, subComponents, quants, spicy, bitter, pungent, sweet, umami, true));
+
+            recs.add(new Recipe(name, diff, time, complex, cats, ings, subComponents, quants, spicy, bitter, pungent,
+                    sweet, umami, true));
 
             // Discard separator
             in.readLine();
         }
 
-        Competition.themes = themes.toArray(new String[themes.size()]);
         Recipe.recipes = recs.toArray(new Recipe[recs.size()]);
-        
+
+        // Create a list of all subcomponents
+        ArrayList<Recipe> subComponents = new ArrayList<Recipe>();
+        ArrayList<String> subNames = new ArrayList<String>();
+        for(int i = 0; i < Recipe.recipes.length; i++)
+        {
+            String[] subs = Recipe.recipes[i].getSubComponents();
+
+            for(int j = 0; j < subs.length; j++)
+            {
+                String type;
+                if(subs[j].charAt(0) == '-')
+                {
+                    type = subs[j].substring(1);
+                }
+                else
+                {
+                    type = subs[j];
+                }
+
+                if(!(subNames.contains(type)))
+                {
+                    subNames.add(type);
+                }
+            }
+        }
+
+        // Create a list of types from the recipes that are not subcomponents
+        for(int i = 0; i < Recipe.recipes.length; i++)
+        {
+            String[] cats = Recipe.recipes[i].getCategories();
+            
+            boolean isSubComp = false;
+            for(int j = 0; j < cats.length; j++)
+            {
+                if(Cook.inList(cats[j], subNames.toArray(new String[subNames.size()])))
+                {
+                    isSubComp = true;
+                }
+            }
+            
+            if(isSubComp)
+            {
+                subComponents.add(Recipe.recipes[i]);
+            }
+        }
+        for(int i = 0; i < Recipe.recipes.length; i++)
+        {            
+            if(!(subComponents.contains(Recipe.recipes[i])))
+            {
+                String[] cats = Recipe.recipes[i].getCategories();
+                
+                for(int j = 0; j < cats.length; j++)
+                {
+                    if(!(themes.contains(cats[j])))
+                    {
+                        themes.add(cats[j]);
+                    }
+                }
+            }
+        }
+
+        Competition.themes = themes.toArray(new String[themes.size()]);
+
         in.close();
     }
 
