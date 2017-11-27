@@ -1,26 +1,26 @@
 name   skill   preferredcomplexity
 
 Dr_Doran   5   4
-preferredingredients:   bacon   yellow_onion   shrimp   red_pepper_flakes   sharp_cheddar
+preferredingredients:   bacon   yellow_onion   shrimp   red_pepper_flakes   sharp_cheddar   french_bread
 avoidedingredients:   ketchup   salmon
-excelAt:   blackened_shrimp   steak
+excelAt:   blackened_shrimp   steak   garlic_bread   stir-fry
 
 Dr_McDonald   4   2
 preferredingredients:   bacon   ham   ground_pork   pork_roast   pork_chop
 avoidedingredients:   squid   mozzarella
-excelAt:   burger   cereal
+excelAt:   burger   cereal   taco   sauteed_beef_strips
 
 Mr_Whitston   3   5
-preferredingredients:   cereal   squid   chives   swiss   eel   cinnamon
+preferredingredients:   cereal   squid   chives   swiss   eel   cinnamon   pickle
 avoidedingredients:   dill   garlic   cottage
-excelAt:   breakfast   calamari
+excelAt:   breakfast   calamari   fried_pickles
 
 Mrs_McKinney   5   2
-preferredingredients:   white_sugar   potato_roll   bagel   siracha   peanut_butter
+preferredingredients:   white_sugar   potato_roll   bagel   siracha   peanut_butter   green_onion
 avoidedingredients:   liver
-excelAt:   pie   scrambled_eggs
+excelAt:   pie   scrambled_eggs   asian   steamed_dumplings
 
 Dr_Johnsten   4   1
-preferredingredients:   bleu_cheese   shrimp   avocado   whole_grain_flour
+preferredingredients:   bleu_cheese   shrimp   avocado   whole_grain_flour   ricotta
 avoidedingredients:   pistachio
-excelAt:
+excelAt:   italian   lasagna
