@@ -6,7 +6,6 @@
 package main;
 
 import java.util.*;
-import java.io.*;
 
 public class Competition
 {
@@ -64,35 +63,13 @@ public class Competition
         }
         else
         {
-            try
+
+            for(int i = 0; i < pantryQuantities.length; i++)
             {
-                FileWriter out = new FileWriter(new File("quantities.txt"));
-                for(int i = 0; i < pantryQuantities.length; i++)
-                {
-                    // Multiply by 100 to allow for fractional ingredient requirements
-                    pantryQuantities[i] = (int) ((Math.random() * 21) * 100);
-                    if(i == 0 || i + 1 % 20 == 1)
-                    {
-                    out.write(pantryQuantities[i]);
-                    }
-                    else
-                    {
-                        out.write("," + pantryQuantities[i]);
-                    }
-                    
-                    if(i + 1 % 20 == 0)
-                    {
-                        out.write("\n");
-                    }
-                }
-                out.close();
+                // Multiply by 100 to allow for fractional ingredient requirements
+                pantryQuantities[i] = (int) ((Math.random() * 21) * 100);
             }
-            catch(IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            
+
         }
 
         for(int i = 0; i < basket.length; i++)
@@ -171,16 +148,16 @@ public class Competition
     {
         return timeLimit;
     }
-    
+
     public static int[] convertToIntArray(Integer[] arr)
     {
         int[] ret = new int[arr.length];
-        
+
         for(int i = 0; i < ret.length; i++)
         {
             ret[i] = arr[i];
         }
-        
+
         return ret;
     }
 

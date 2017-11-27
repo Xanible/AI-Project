@@ -231,3 +231,9 @@ type(s):   italian   dinner   lunch
 Ingredients:   *lasagna_noodle   -pork   -beef   *mozzarella   *ricotta
 Quantities:   5_pieces   0.25_pound   0.25_pound   1.5_cup   0.5_cup
 Subcomponents:   pasta_sauce
+
+calamari   3   15   2
+Preffered_taste:   0   0   0   0   0
+type(s):   italian   side_dish   lunch
+Ingredients:   *squid   *panko_bread_crumbs   *egg   flour   -spices   -spices
+Quantities:   0.5_pound   1_cup   1_piece   1_cup   1_tablespoon   1_tablespoon
