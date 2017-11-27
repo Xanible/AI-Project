@@ -6,6 +6,7 @@
 package main;
 
 import java.util.*;
+import java.io.*;
 
 public class Competition
 {
@@ -44,22 +45,60 @@ public class Competition
         pantryQuantities = new int[Ingredient.ingredients.length];
     }
 
-    public String beginRound(String[] pantry, String newTheme)
+    public String beginRound(String[] basket, String newTheme)
     {
         String output = "";
         theme = newTheme;
 
-        // Initialize pantry
-        for(int i = 0; i < pantryQuantities.length; i++)
+        if(Main.isDemo)
         {
-            // Multiply by 100 to allow for fractional ingredient requirements
-            pantryQuantities[i] = (int) ((Math.random() * 21) * 100);
+            try
+            {
+                pantryQuantities = convertToIntArray(Main.readDemoQuantities());
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                return "Error";
+            }
+        }
+        else
+        {
+            try
+            {
+                FileWriter out = new FileWriter(new File("quantities.txt"));
+                for(int i = 0; i < pantryQuantities.length; i++)
+                {
+                    // Multiply by 100 to allow for fractional ingredient requirements
+                    pantryQuantities[i] = (int) ((Math.random() * 21) * 100);
+                    if(i == 0 || i + 1 % 20 == 1)
+                    {
+                    out.write(pantryQuantities[i]);
+                    }
+                    else
+                    {
+                        out.write("," + pantryQuantities[i]);
+                    }
+                    
+                    if(i + 1 % 20 == 0)
+                    {
+                        out.write("\n");
+                    }
+                }
+                out.close();
+            }
+            catch(IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
         }
 
-        for(int i = 0; i < pantry.length; i++)
+        for(int i = 0; i < basket.length; i++)
         {
-            emphasizedIngredients[i] = pantry[i];
-            int index = Ingredient.getIndexOfIngredient(pantry[i]);
+            emphasizedIngredients[i] = basket[i];
+            int index = Ingredient.getIndexOfIngredient(basket[i]);
             pantryQuantities[index] = 100000000;
         }
 
@@ -75,6 +114,11 @@ public class Competition
         {
             Recipe[] dish = cooks.get(i).getDishes();
 
+            if(cooks.get(i).getDishes().length == 0)
+            {
+                // Cooks should be penalized for not cooking anything
+                cooks.get(i).setScore(-10000);
+            }
             for(int j = 0; j < dish.length; j++)
             {
                 cooks.get(i).setScore(cooks.get(i).getScore() + evaluateDish(cooks.get(i), dish[j]));
@@ -126,6 +170,18 @@ public class Competition
     public static int getTimeLimit()
     {
         return timeLimit;
+    }
+    
+    public static int[] convertToIntArray(Integer[] arr)
+    {
+        int[] ret = new int[arr.length];
+        
+        for(int i = 0; i < ret.length; i++)
+        {
+            ret[i] = arr[i];
+        }
+        
+        return ret;
     }
 
     private ArrayList<Cook> pickRandomCooks(int count)
@@ -203,7 +259,7 @@ public class Competition
         {
             score = score + 45;
         }
-        
+
         // Ingredient level scoring
         String[] ings = dish.getIngredients();
         for(int i = 0; i < ings.length; i++)

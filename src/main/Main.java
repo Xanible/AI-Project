@@ -21,6 +21,7 @@ import java.util.*;
 
 public class Main extends JFrame
 {
+    public static boolean isDemo;
     private static final long serialVersionUID = -3268699488432330183L;
     private static final String delimiter = "   ";
 
@@ -36,6 +37,7 @@ public class Main extends JFrame
     private JPanel pnlLeft, pnlBasket, pnlRight, pnlTheme;
     private int currBasket;
     private Competition comp;
+    
     private ActionListener cbBasketListener = new ActionListener()
     {
         public void actionPerformed(ActionEvent ae)
@@ -229,6 +231,13 @@ public class Main extends JFrame
 
     public static void main(String[] args) throws Exception
     {
+        if(args.length > 0)
+        {
+            if(args[0].equalsIgnoreCase("-demo"))
+            {
+                isDemo = true;
+            }
+        }
         readIngredientsFile();
         readRecipesFile();
         readCooksFile();
@@ -474,5 +483,25 @@ public class Main extends JFrame
 
         Cook.cooks = cooks.toArray(new Cook[cooks.size()]);
         in.close();
+    }
+    
+    public static Integer[] readDemoQuantities() throws Exception
+    {
+        BufferedReader in = new BufferedReader(new FileReader(new File("quantities.txt")));
+        ArrayList<Integer> quantities = new ArrayList<Integer>();
+
+        while(in.ready())
+        {
+            // Read in the next line
+            String[] line = in.readLine().split(",");
+            
+            for(int i = 0; i < line.length; i++)
+            {
+                quantities.add(Integer.parseInt(line[i]));
+            }
+        }
+
+        in.close();
+        return  quantities.toArray(new Integer[quantities.size()]);
     }
 }

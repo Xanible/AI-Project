@@ -187,7 +187,7 @@ vegetable   artichoke   0   0   0   0   0
 vegetable   avocado   0   0   0   0   0
 vegetable   cucumber   0   0   0   0   0
 vegetable   zucchini   0   0   0   0   0
-vegetable   pickle   0   1   0   0   0
+vegetable   pickle   0   0   0   0   0
 fruit   strawberry   0   0   0   1   0
 fruit   watermelon   0   0   0   1   0
 fruit   apple   0   0   0   1   0
