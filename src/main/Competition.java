@@ -6,6 +6,7 @@
 package main;
 
 import java.util.*;
+import java.io.*;
 
 public class Competition
 {
@@ -34,6 +35,16 @@ public class Competition
     private ArrayList<Cook> cooks;
     private int[] pantryQuantities;
 
+    /*public static void main(String[] args) throws Exception
+    {
+        Main.readIngredientsFile();
+        Main.readRecipesFile();
+        Main.readCooksFile();
+        
+        Competition comp = new Competition();
+        JOptionPane.showMessageDialog(null, comp.beginRound(new String[] {"shrimp", "soy sauce", "green onion", "sushi rice"}, "asian"));
+    }*/
+    
     public Competition()
     {
         // Create list of chefs
@@ -63,12 +74,38 @@ public class Competition
         }
         else
         {
-
-            for(int i = 0; i < pantryQuantities.length; i++)
+            try
             {
-                // Multiply by 100 to allow for fractional ingredient requirements
-                pantryQuantities[i] = (int) ((Math.random() * 21) * 100);
+                FileWriter out = new FileWriter(new File("quantities.txt"));
+                String list = "";
+                for(int i = 0; i < pantryQuantities.length; i++)
+                {
+                    // Multiply by 100 to allow for fractional ingredient requirements
+                    pantryQuantities[i] = ((int) (Math.random() * 19) + 1) * 100;
+                    if((i + 1) % 20 == 1)
+                    {
+                        list = list + pantryQuantities[i];
+                    }
+                    else
+                    {
+                        list = list + "," + pantryQuantities[i];
+                    }
+                    
+                    if((i + 1) % 20 == 0)
+                    {
+                        list = list + "\n";
+                    }
+                }
+                
+                out.write(list);
+                out.close();
             }
+            catch(IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
 
         }
 
@@ -227,7 +264,7 @@ public class Competition
 
         // Check that dish matches the theme of the round
         String[] categories = Cook.checkCategories(dish);
-        if(!(Cook.inList(theme, categories)))
+        if(!(Cook.inList(theme, categories)) && !(Cook.inList(dish.getName(), Recipe.subcomponentNames)))
         {
             score = score - 200;
         }

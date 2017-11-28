@@ -42,4 +42,3 @@ icecream   vanilla_icecream   0   0   0   1   0
 other   nori   0   0   0   0   0
 milk   almond_milk   0   0   0   1   0
 other   panko_bread_crumbs   0   0   0   0   0
-

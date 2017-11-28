@@ -100,10 +100,11 @@ public class Cook
             // remaining
             for(int i = 0; i < ranked.size(); i++)
             {
+
                 if(ranked.get(i).getTime() <= (Competition.getTimeLimit() - timeUsed))
                 {
-                    // If goodness is above a given threshold
-                    if(ranked.get(i).getGoodness() >= 50)
+                    // If goodness is above a given threshold and recipe has not been cooked before
+                    if(ranked.get(i).getGoodness() >= 50 && !compareRecipeLists(ranked.get(i), cooked))
                     {
                         cooked.add(ranked.get(i));
                         timeUsed = timeUsed + ranked.get(i).getTime();
@@ -120,7 +121,7 @@ public class Cook
                     }
                     else
                     {
-                        break;
+                        continue;
                     }
                 }
             }
@@ -139,6 +140,19 @@ public class Cook
 
         this.dishes = cooked.toArray(new Recipe[cooked.size()]);
         return quantities;
+    }
+
+    private static boolean compareRecipeLists(Recipe ranked, ArrayList<Recipe> cooked)
+    {
+        for(int i = 0; i < cooked.size(); i++)
+        {
+            if(cooked.get(i).getName().equals(ranked.getName()))
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     public static int computeFlavorDistance(Recipe r, Ingredient i)
@@ -213,7 +227,7 @@ public class Cook
     }
 
     // Scoring weights:
-    // Theme matches = 100
+    // Theme matches = 200
     // Distance from preferred complexity = 20 - 5 * dist
     // Flavor distance = -20 * flavorDist
     // Basket ingredient = 25 per
@@ -226,17 +240,23 @@ public class Cook
         for(Recipe r : complex)
         {
             Recipe m = matchIngredients(r, quantities);
+            if(m != null)
+            {
+                System.out.println("Recipe " + m.getName());
+            }
 
             if(m != null)
             {
                 // Set the score to the distance parameter (20 - 5 * dist)
                 int score = 20 - 5 * dist;
+                System.out.println("Distance score " + score);
 
                 // Determine which of its categories the recipe matches
                 String[] matchedCategories = checkCategories(m);
-                if(inList(Competition.getTheme(), matchedCategories))
+                if(inList(Competition.getTheme(), matchedCategories) || inList(m.getName(), Recipe.subcomponentNames))
                 {
-                    score = score + 100;
+                    score = score + 200;
+                    System.out.println("Category score " + 200);
                 }
 
                 // Sum the goodness scores of the ingredients
@@ -246,6 +266,8 @@ public class Cook
                 {
                     score = score + Integer.parseInt(ings[i].substring(0, ings[i].indexOf('*')));
                     newIngs[i] = ings[i].substring(ings[i].indexOf('*') + 1);
+                    System.out.println("Ingredient " + newIngs[i] + " score is "
+                            + Integer.parseInt(ings[i].substring(0, ings[i].indexOf('*'))));
                 }
 
                 Recipe eRec = new Recipe(m.getName(), m.getDifficulty(), m.getTime(), m.getComplexity(),
@@ -254,6 +276,8 @@ public class Cook
 
                 eRec.setGoodness(score);
                 possible.add(eRec);
+
+                System.out.println("Final score is " + score);
             }
         }
 
@@ -490,12 +514,12 @@ public class Cook
                         for(int k = 0; k < eings.length; k++)
                         {
                             score = score + Integer.parseInt(eings[i].substring(0, eings[i].indexOf('*')));
+                        }
 
-                            if(score > bestScore)
-                            {
-                                bestScore = score;
-                                best = subR;
-                            }
+                        if(score > bestScore)
+                        {
+                            bestScore = score;
+                            best = subR;
                         }
                     }
                 }
@@ -531,21 +555,26 @@ public class Cook
 
     private String evaluateIngredient(Recipe r, String ing)
     {
+        System.out.println(ing);
         int goodness = 0;
         if(inList(ing, preferredIngredients))
         {
             goodness = goodness + 10;
+            System.out.println("Is preferred, +10");
         }
         if(inList(ing, avoidedIngredients))
         {
             goodness = goodness - 200;
+            System.out.println("Is avoided, -200");
         }
         if(inList(ing, Competition.getBasket()))
         {
             goodness = goodness + 25;
+            System.out.println("Is in the basket, +25");
         }
         int flavorDist = computeFlavorDistance(r, Ingredient.getIngredientByName(ing));
         goodness = goodness - 20 * flavorDist;
+        System.out.println("Flavor distance is " + flavorDist + " -" + flavorDist * 20);
 
         return goodness + "*" + ing;
     }

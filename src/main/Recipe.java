@@ -13,6 +13,7 @@ public class Recipe
      * as an integer from 1-5 Array of categories Array of ingredients
      */
     public static Recipe[] recipes = {};
+    public static String[] subcomponentNames;
 
     private String name;
     private int difficulty;

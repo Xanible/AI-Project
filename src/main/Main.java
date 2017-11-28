@@ -37,7 +37,7 @@ public class Main extends JFrame
     private JPanel pnlLeft, pnlBasket, pnlRight, pnlTheme;
     private int currBasket;
     private Competition comp;
-    
+
     private ActionListener cbBasketListener = new ActionListener()
     {
         public void actionPerformed(ActionEvent ae)
@@ -127,15 +127,41 @@ public class Main extends JFrame
         lblBasket = new JLabel("Basket");
         pnlLeft.add(lblBasket, c);
 
-        pnlBasket = new JPanel(new GridLayout(Ingredient.ingredients.length, 1));
-        cbBasket = new JCheckBox[Ingredient.ingredients.length];
-
-        for(int i = 0; i < Ingredient.ingredients.length; i++)
+        if(isDemo)
         {
-            cbBasket[i] = new JCheckBox(Ingredient.ingredients[i].getName());
-            cbBasket[i].addActionListener(cbBasketListener);
-            cbBasket[i].setMinimumSize(new Dimension(200, 20));
-            pnlBasket.add(cbBasket[i]);
+            String[] list;
+            try
+            {
+                list = readBasketFile();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                return;
+            }
+            
+            pnlBasket = new JPanel(new GridLayout(list.length, 1));
+            cbBasket = new JCheckBox[list.length];
+            
+            for(int i = 0; i < list.length; i++)
+            {
+                cbBasket[i] = new JCheckBox(list[i]);
+                cbBasket[i].addActionListener(cbBasketListener);
+                cbBasket[i].setMinimumSize(new Dimension(200, 20));
+                pnlBasket.add(cbBasket[i]);
+            }
+        }
+        else
+        {
+            pnlBasket = new JPanel(new GridLayout(Ingredient.ingredients.length, 1));
+            cbBasket = new JCheckBox[Ingredient.ingredients.length];
+            for(int i = 0; i < Ingredient.ingredients.length; i++)
+            {
+                cbBasket[i] = new JCheckBox(Ingredient.ingredients[i].getName());
+                cbBasket[i].addActionListener(cbBasketListener);
+                cbBasket[i].setMinimumSize(new Dimension(200, 20));
+                pnlBasket.add(cbBasket[i]);
+            }
         }
 
         scpBasket = new JScrollPane(pnlBasket);
@@ -266,7 +292,7 @@ public class Main extends JFrame
         }
 
         Ingredient.ingredients = ings.toArray(new Ingredient[ings.size()]);
-        
+
         in.close();
     }
 
@@ -382,12 +408,13 @@ public class Main extends JFrame
                 }
             }
         }
-
+        Recipe.subcomponentNames = subNames.toArray(new String[subNames.size()]);
+        
         // Create a list of types from the recipes that are not subcomponents
         for(int i = 0; i < Recipe.recipes.length; i++)
         {
             String[] cats = Recipe.recipes[i].getCategories();
-            
+
             boolean isSubComp = false;
             for(int j = 0; j < cats.length; j++)
             {
@@ -396,18 +423,18 @@ public class Main extends JFrame
                     isSubComp = true;
                 }
             }
-            
+
             if(isSubComp)
             {
                 subComponents.add(Recipe.recipes[i]);
             }
         }
         for(int i = 0; i < Recipe.recipes.length; i++)
-        {            
+        {
             if(!(subComponents.contains(Recipe.recipes[i])))
             {
                 String[] cats = Recipe.recipes[i].getCategories();
-                
+
                 for(int j = 0; j < cats.length; j++)
                 {
                     if(!(themes.contains(cats[j])))
@@ -484,7 +511,7 @@ public class Main extends JFrame
         Cook.cooks = cooks.toArray(new Cook[cooks.size()]);
         in.close();
     }
-    
+
     public static Integer[] readDemoQuantities() throws Exception
     {
         BufferedReader in = new BufferedReader(new FileReader(new File("quantities.txt")));
@@ -494,7 +521,7 @@ public class Main extends JFrame
         {
             // Read in the next line
             String[] line = in.readLine().split(",");
-            
+
             for(int i = 0; i < line.length; i++)
             {
                 quantities.add(Integer.parseInt(line[i]));
@@ -502,6 +529,28 @@ public class Main extends JFrame
         }
 
         in.close();
-        return  quantities.toArray(new Integer[quantities.size()]);
+        return quantities.toArray(new Integer[quantities.size()]);
+    }
+
+    public static String[] readBasketFile() throws Exception
+    {
+        ArrayList<String> basket = new ArrayList<String>();
+        BufferedReader in = new BufferedReader(new FileReader(new File("basket.txt")));
+
+        // Skip the first line
+        in.readLine();
+        
+        while(in.ready())
+        {
+            String[] line = in.readLine().split(delimiter);
+
+            if(line.length > 1)
+            {
+                basket.add(line[1].replaceAll("_", " "));
+            }
+        }
+
+        in.close();
+        return basket.toArray(new String[basket.size()]);
     }
 }
